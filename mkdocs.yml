@@ -1,5 +1,8 @@
 site_name: leoalasiaga Docs
 site_url: https://leoalasiaga.com/
+copyright: Copyright &copy; 2023 jiajie liu
+
+
 nav:
   - Home: index.md
   - About: about.md
