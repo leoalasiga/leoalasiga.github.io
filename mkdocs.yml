@@ -1,10 +1,66 @@
 site_name: leoalasiaga Docs
-site_url: https://leoalasiaga.com/
-copyright: Copyright &copy; 2023 jiajie liu
+site_description: the notes record by leoalsiga
+repo_name: leoalasiga.github.io
+repo_url: https://github.com/leoalasiga/leoalasiga.github.io.git
+site_url: https://leoalasiga.github.io/
+copyright: Copyright &copy; 2023 leoalasiaga
 
 
 nav:
-  - Home: index.md
+  - Java: 
+    - java/index.md
+    - 设计模式: java/设计模式/index.md
+  - Dokcer:
+    - docker/index.md
+ #   - Installation: guide/installation.md
+ #   - Basics: guide/basics.md
+ #   - Configuration: guide/config.md
+  - K8s:
+    - k8s/index.md
   - About: about.md
 theme:
   name: material
+  palette:
+    primary: custom
+  language: zh
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.tracking
+    - content.code.annotate
+    - toc.integrate
+    - toc.follow
+    - navigation.path
+    - navigation.top
+    - navigation.tabs
+    - navigation.footer
+    - content.code.copy
+  palette: 
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+      primary: deep #, [red, pink, purple, deep, purple, indigo, blue, light blue, cyan, teal, green, light green, lime, yellow, amber, orange, deep orange, brown, grey, blue, grey, black, white]
+      accent: deep # [red, pink, purple, deep, purple, indigo, blue, light, blue, cyan, teal, green, light, green, lime, yellow, amber, orange, deep orange]
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep #, [red, pink, purple, deep, purple, indigo, blue, light blue, cyan, teal, green, light green, lime, yellow, amber, orange, deep orange, brown, grey, blue, grey, black, white]
+      accent: deep # [red, pink, purple, deep, purple, indigo, blue, light, blue, cyan, teal, green, light, green, lime, yellow, amber, orange, deep orange]
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
