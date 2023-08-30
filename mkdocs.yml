@@ -38,12 +38,13 @@ theme:
     - navigation.path
     - navigation.top # 返回顶部的按钮 在上滑时出现
     - navigation.tabs
+    - navigation.prune
     - navigation.footer
-   #- navigation.tabs.sticky  #启用粘性选项卡后，导航选项卡将锁定在标题下方，并在向下滚动时始终保持可见
-   #- navigation.sections #启用部分后，顶级部分在边栏中呈现为1220px以上视口的组，但在移动设备上保持原样
-   #- navigation.expand # 打开Tab时左侧目录全部展开
+    - navigation.tabs.sticky  #启用粘性选项卡后，导航选项卡将锁定在标题下方，并在向下滚动时始终保持可见
+    - navigation.sections #启用部分后，顶级部分在边栏中呈现为1220px以上视口的组，但在移动设备上保持原样
+    - navigation.expand # 打开Tab时左侧目录全部展开
     - content.code.copy
-   #- navigation.indexes #启用节索引页后，可以将文档直接附加到节
+    - navigation.indexes #启用节索引页后，可以将文档直接附加到节
     - search.share #搜索分享按钮
     - search.suggest # 搜索输入一些字母时推荐补全整个单词
     - search.highlight # 搜索出的文章关键词加入高亮
@@ -92,6 +93,7 @@ markdown_extensions:
       generic: true
   - toc:
       permalink: true # 固定标题位置为当前位置
+      title: On this page
   - pymdownx.highlight: # 代码块高亮
       anchor_linenums: true
       # linenums: true # 显示行号
@@ -105,6 +107,7 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences # 代码块高亮插件
   - meta # 支持Markdown文件上方自定义标题标签等
+  - tables
      
 extra_javascript:
   - javascripts/extra.js
@@ -155,5 +158,5 @@ extra:
 
 plugins:
   - search
- # - tags:
- #     tags_file: tag.md #标签
+  - tags:
+      tags_file: tag.md #标签
