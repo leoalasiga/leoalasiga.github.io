@@ -1,3 +1,102 @@
+---
+tags:
+ - python
+ - mkdocs
+ - github
+---
+
+# Mkdocs+Material+GithubPage+Github Action自动化搭建你自己的博客！
+
+
+
+## 什么是Mkdocs
+
+>  Write your documentation in Markdown and create a professional static site in minutes – searchable, customizable, in 60+ languages, for all devices.
+
+用Markdown 撰写我们的文档，通过Mkdocs我们可以在几分钟内完成构建一个专业的静态网站。
+
+这就很厉害了，接下来，我们来看看怎么去使用Mkdocs
+
+
+
+## 安装Mkdocs
+
+通过pip安装
+
+```shell
+$ pip install mkdocs-material
+```
+
+查看版本
+
+```shell
+$ mkdocs -V
+mkdocs, version 1.5.2 from C:\Python311\Lib\site-packages\mkdocs (Python 3.11)
+```
+
+
+
+## 创建你的网站
+
++ 创建一个文件夹如my_site
+
++ 切换到这个文件夹下，通过cmd或者右键Git Bash Here，打开命令行工具
+
++ 输入以下的命令
+
+```shell
+$ mkdocs new .
+```
+
+就会再当前目录生成如下结构的内容
+
+```
+.
+├─ docs/
+│  └─ index.md
+└─ mkdocs.yml
+```
+
++ 然后使用如下命令运行你的网站
+
+```shell
+$ mkdocs serve
+INFO    -  Building documentation...
+INFO    -  Cleaning site directory
+INFO    -  Documentation built in 0.06 seconds
+INFO    -  [14:51:49] Watching paths for changes: 'docs', 'mkdocs.yml'
+INFO    -  [14:51:49] Serving on http://127.0.0.1:8000/
+WARNING -  [14:51:59] "GET /%E6%95%99%E7%A8%8B/mkdocs/ HTTP/1.1" code 404
+INFO    -  [14:52:07] Browser connected: http://127.0.0.1:8000/
+```
+
++ 访问上面这个网站，你就可以看到你的网站了
+
+![mysite_origin.png](./mkdocs/mysite_origin.png)
+
++ 这个时候，你的网站就搭建完成了，doc/index.md显示的内容就是你首页展示的内容
+
++ 然后你就会觉得这个网站很丑，你想让他变得漂亮，这个时候，只要做个简单的配置，你就可以创建出一个良好主题的mkdocs网站
+
+
+
+## 配置你的网站
+
++ 打开my_site下的mkdocs.yml,只要配置一句话，既可以配置全新的主题
+
+```yaml
+theme:
+  name: material
+```
+
++ 重启你的服务，你就能获得全新的主题
+
+![mysite_origin.png](./mkdocs/mysite_material.png)
+
++ 这个时候，你可能觉得还是捡漏，这个时候，你可以去[Material官网](https://squidfunk.github.io/mkdocs-material/setup/)，查看更多的配置，优化你的站点
++ 或者参考的我的配置
+
+```yaml
 #[Info]
 site_name: leoalasiaga Docs   #网站名字
 site_description: the notes record by leoalsiga
@@ -75,21 +174,16 @@ repo_name: leoalasiga.github.io # 右上角的名
 repo_url: https://github.com/leoalasiga/leoalasiga.github.io.git # 右上角点击跳转的链接
 
 
-#markdown_extensions:
-#  - admonition
-#  - pymdownx.details
-#  - pymdownx.keys
-#  - pymdownx.superfences
-#  - pymdownx.tabbed:
-#      alternate_style: true 
-#      
-
-
 markdown_extensions:
+  - admonition
   - abbr
-  - pymdownx.caret
+  - pymdownx.caret    
+  - pymdownx.details
+  - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true 
   - md_in_html
   - pymdownx.arithmatex:  # latex支持
       generic: true
@@ -102,7 +196,6 @@ markdown_extensions:
       # auto_title: true # 显示编程语言名称
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
@@ -124,13 +217,13 @@ extra:
   generator: false  #删除页脚显示“使用 MkDocs 材料制造”
  # social:
   #  - icon: fontawesome/brands/twitter 
-  #    link: https://twitter.com/wcowin_
+  #    link: https://twitter.com/
   #  - icon: fontawesome/brands/github
-  #    link: https://github.com/Wcowin
+  #    link: https://github.com/
   #  - icon: fontawesome/brands/bilibili
-  #    link: https://space.bilibili.com/1407028951?spm_id_from=333.1007.0.0
+  #    link: https://space.bilibili.com/
   #  - icon: fontawesome/solid/paper-plane
-  #    link: mailto:<1135801806@qq.com> #联系方式
+  #    link: mailto:<xxxxxx@qq.com> #联系方式
   #
   
 #  analytics: 
@@ -162,3 +255,41 @@ plugins:
   - search
   - tags:
       tags_file: tag.md #标签
+```
+
+
+
+## 部署你的网站
+
+> 当你完成你的网站构建之后，你想去部署你的博客网站，你可以选择以下两种方式
+
++ 自己构建，部署到自己的服务器上
+
+```shell
+$ mkdocs build
+```
+
+你就会在你的目录下生成一个site目录，里面的内容就是mkdocs给你编译好的静态网站
+
+```
+.
+├─ docs/
+│  └─ index.md
+├─ docs/
+│  └─ assets/
+│  └─ search/
+│  └─ 404.html
+│  └─ index.html
+│  └─ sitemap.xml
+│  └─ sitemap.xml.gz
+└─ mkdocs.yml
+```
+
+你可以将这个目录，部署到你自己的服务器上，配置nginx等访问，从而实现你的博客网站的访问
+
++ 或者，你也可以选择和我一样，**白嫖**github的资源，利用github page，搭建你自己的博客网站
+
+
+
+## 用github page创建你得博客网站
+
