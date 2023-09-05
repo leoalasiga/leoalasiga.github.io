@@ -91,7 +91,7 @@ theme:
 
 + 重启你的服务，你就能获得全新的主题
 
-![mysite_origin.png](./mkdocs/mysite_material.png)
+![mysite_material.png](./mkdocs/mysite_material.png)
 
 + 这个时候，你可能觉得还是捡漏，这个时候，你可以去[Material官网](https://squidfunk.github.io/mkdocs-material/setup/)，查看更多的配置，优化你的站点
 + 或者参考的我的配置
@@ -275,7 +275,7 @@ $ mkdocs build
 .
 ├─ docs/
 │  └─ index.md
-├─ docs/
+├─ site/
 │  └─ assets/
 │  └─ search/
 │  └─ 404.html
@@ -293,3 +293,116 @@ $ mkdocs build
 
 ## 用github page创建你得博客网站
 
+### 创建一个仓库
+
+去github，建立一个仓库，仓库的名称如下(username就是你的github用户名)
+
+```txt
+<username>.github.io
+```
+
+如图
+
+![githubio.png](./mkdocs/githubio.png)
+
+### clone你的仓库
+
+```shell
+$ git clone https://github.com/username/username.github.io
+```
+
+### 提交你的代码
+
+将你通过mkdocs build的文件，即site目录里的所有内容，全部拷贝到你的GitHub clone下来的目录username.github.io,然后执行以下命令
+
+```shell
+# 添加当前目录所有文件
+$ git add .
+# 添加提交描述
+$ git commit -m "Initial commit"
+# 推送至仓库
+$ git push -u origin main
+```
+
+### 访问你的网站
+
+这个时候，你的网站就已经搭建完成了，直接访问这个地址就可以访问了 https://username.github.io
+
+### 能不能更简便一点？
+
+这时候，你会发现，这样做很麻烦，每次都要自己本地构建静态文件，然后拷贝到相关目录下，然后push到仓库。那么有没有方法可以自动化的帮你完成这个流程，帮你自动化构建完成这个内容呢？
+
+答案就是github action！！！！
+
+
+
+## 通过github action完成个人网站的自动化构建
+
+> 在mkdocs-material的官网，其实已经教了我们怎么部署我们的个人网站了
+
+> Using [GitHub Actions](https://github.com/features/actions) you can automate the deployment of your project documentation. At the root of your repository, create a new GitHub Actions workflow, e.g. `.github/workflows/ci.yml`, and copy and paste the following contents:
+>
+> 意思就是使用GitHub Actions，就可以自动化的部署你的网站，在仓库的根目录，创建一个新的GitHub Actions workflow，比如：`.github/workflows/ci.yml`,然后拷贝粘贴下面的内容
+
+### 建立github action
+
+即在我们的username.github.io目录，删除之前的文件，将my_site里的docs目录和mkdocs.yml文件拷贝到username.github.io目录，并添加`.github/workflows/ci.yml`，即username.github.io目录的文件内容如下
+
+```
+.
+├─ docs/
+│  └─ index.md
+├─ .github/
+│  └─ workflows/
+│    └─ ci.yml
+└─ mkdocs.yml
+```
+
+然后编辑这个文件，添加这个内容
+
+```yaml
+name: ci 
+on:
+  push:
+    branches:
+      - main # 根据实际的分支情况设置
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v3
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material 
+      - run: mkdocs gh-deploy --force
+```
+
+他的原理，相当于通过github action，在ubuntu-latest的镜像内，执行了我们人工操作的安装mkdocs-material， 然后部署了我们的网站
+
+然后后续我们只要push我们的仓库，我们就可以自动化的部署我们的网站了
+
+
+
+当然，做到这里，你会发现访问的网站变成404了，这时候，你要去github在配置一下
+
+![githubaction.png](./mkdocs/githubaction.png)
+
+
+
+然后当你git push 完你的文档，github 就会自动给你构建展示你的网站，并部署到你gh-pages分支内
+
+
+
+### 查看github action构建进度
+
+![actionprocess.png](./mkdocs/actionprocess.png)
