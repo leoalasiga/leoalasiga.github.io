@@ -20,6 +20,7 @@ nav:
     - k8s/index.md
   - 教程:
     - 教程/mkdocs.md
+    - 教程/skywalking.md
   - About: about.md
 
 #[UI]
@@ -75,21 +76,16 @@ repo_name: leoalasiga.github.io # 右上角的名
 repo_url: https://github.com/leoalasiga/leoalasiga.github.io.git # 右上角点击跳转的链接
 
 
-#markdown_extensions:
-#  - admonition
-#  - pymdownx.details
-#  - pymdownx.keys
-#  - pymdownx.superfences
-#  - pymdownx.tabbed:
-#      alternate_style: true 
-#      
-
-
 markdown_extensions:
+  - admonition
   - abbr
   - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true 
   - md_in_html
   - pymdownx.arithmatex:  # latex支持
       generic: true
@@ -102,7 +98,6 @@ markdown_extensions:
       # auto_title: true # 显示编程语言名称
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
