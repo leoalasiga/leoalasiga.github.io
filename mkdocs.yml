@@ -6,12 +6,15 @@ repo_name: leoalasiga/leoalasiga.github.io.git # 仓库地址
 copyright: Copyright &copy; 2023 leoalasiaga # 左下角的版权声明
 # edit_uri: edit/main/docs/ # 开启编辑
 nav:
+
   - 博客:
     - blog/index.md
   - 标签:
     - tags.md
+  - 联系我:
+    - index.md
 theme:
- # custom_dir: overrides
+  custom_dir: overrides
   features:
     - navigation.indexes
     - navigation.instant

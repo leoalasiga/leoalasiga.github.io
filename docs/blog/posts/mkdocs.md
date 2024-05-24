@@ -6,6 +6,7 @@ tags:
  - python
  - mkdocs
  - github
+comments: true
 ---
 
 # 白嫖GithubPage搭建自己的博客!
