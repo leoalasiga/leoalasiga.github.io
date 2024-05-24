@@ -1,13 +1,19 @@
 ---
+date: 2024-05-21
+authors:
+  - leoalasiga
 tags:
  - python
  - mkdocs
  - github
+comments: true 
 ---
 
-# Mkdocs+Material+GithubPage+Github Action自动化搭建你自己的博客！
+# 白嫖GithubPage搭建自己的博客!
 
+> 利用Mkdocs+Material+GithubPage+Github Action自动化搭建你自己的博客！
 
+<!-- more -->
 
 ## 什么是Mkdocs
 
