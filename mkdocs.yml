@@ -38,7 +38,7 @@ theme:
   #logo: assets/logo.png
   favicon: assets/logo.png
   icon:
-    logo: material/book
+    logo: material/dog
     previous: fontawesome/solid/angle-left
     next: fontawesome/solid/angle-right
     repo: fontawesome/brands/git-alt    #右上角仓库图标
