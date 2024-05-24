@@ -11,7 +11,7 @@ nav:
   - 标签:
     - tags.md
 theme:
-  custom_dir: overrides
+ # custom_dir: overrides
   features:
     - navigation.indexes
     - navigation.instant
