@@ -6,13 +6,12 @@ repo_name: leoalasiga/leoalasiga.github.io.git # 仓库地址
 copyright: Copyright &copy; 2023 leoalasiaga # 左下角的版权声明
 # edit_uri: edit/main/docs/ # 开启编辑
 nav:
-
-  - 博客:
-    - blog/index.md
+  - 主页:
+    - index.md
   - 标签:
     - tags.md
   - 联系我:
-    - index.md
+    - contact.md
 theme:
   custom_dir: overrides
   features:
@@ -136,6 +135,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 plugins:
   - blog:
+      blog_dir: .
       blog_toc: true
       post_date_format: short
       # post_url_format: "{date}/{slug}"
