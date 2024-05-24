@@ -56,7 +56,7 @@ theme:
     - media: "(prefers-color-scheme: light)" # 日间模式
       scheme: default
       primary: green
-      accent: indigo
+      accent: pink
       toggle:
         icon: material/lightbulb
         name: Switch to dark mode
@@ -65,7 +65,7 @@ theme:
     - media: "(prefers-color-scheme: dark)" # 夜间模式
       scheme: slate
       primary: blue
-      accent: indigo
+      accent: pink
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
