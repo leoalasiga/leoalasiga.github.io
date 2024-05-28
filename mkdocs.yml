@@ -22,7 +22,10 @@ theme:
     - navigation.path
     - navigation.top # 返回顶部的按钮 在上滑时出现
     - navigation.footer
+    # - navigation.expand
     - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
     - navigation.prune
     - navigation.footer
     - content.code.annotate
@@ -82,8 +85,11 @@ extra:
   social:
     - icon: fontawesome/brands/github 
       link: https://github.com/leoalasiga
+      name: leoalasiga
     - icon: fontawesome/brands/mastodon 
       link: https://leoalasiga.github.io
+      name: leoalasiga
+
   # consent:
   #   title: Cookie consent
   #   description: >- 
