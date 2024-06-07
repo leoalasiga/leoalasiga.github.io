@@ -8,7 +8,7 @@ copyright: Copyright &copy; 2023 leoalasiaga # 左下角的版权声明
 nav:
   - 主页:
     - index.md
-  - 标签:
+  - 分类:
     - tags.md
   - 联系我:
     - contact.md
