@@ -12,6 +12,8 @@ nav:
     - tags.md
   - 联系我:
     - contact.md
+  - 友链:
+    - link.md
 theme:
   custom_dir: overrides
   features:
