@@ -1,0 +1,1925 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Blogs record by Leoalsiga">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/2024/05/21/skywalking%E6%95%99%E7%A8%8B/">
+      
+      
+      
+        <link rel="next" href="../%E7%99%BD%E5%AB%96githubpage%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B8%80/">
+      
+      
+      <link rel="icon" href="../../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>Skywalking教程 - Leoalasiga Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Mono";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#skywalking教程" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-header__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Leoalasiga Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Skywalking教程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+    
+  
+  主页
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../tags/" class="md-tabs__link">
+          
+  
+    
+  
+  分类
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../contact/" class="md-tabs__link">
+          
+  
+    
+  
+  联系我
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../link/" class="md-tabs__link">
+          
+  
+    
+  
+  友链
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-nav__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    Leoalasiga Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            主页
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../tags/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    分类
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../contact/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    联系我
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../link/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/39647836?s%E2%80%A600&u=ebd5960bd9de24b76570524e4a1a148bd6339b35&v=4" alt="leoalasiga">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          leoalasiga
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-05-21 00:00:00+00:00" class="md-ellipsis">2024/5/21</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 8 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#概念与设计" class="md-nav__link">
+    <span class="md-ellipsis">
+      概念与设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="概念与设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#什么是skywalking" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是skywalking?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#为什么使用-skywalking" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么使用 SkyWalking?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#架构" class="md-nav__link">
+    <span class="md-ellipsis">
+      架构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#设计目标" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计目标
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#探针" class="md-nav__link">
+    <span class="md-ellipsis">
+      探针
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="探针">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#服务自动打点代理" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务自动打点代理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#自动打点是什么意思" class="md-nav__link">
+    <span class="md-ellipsis">
+      自动打点是什么意思?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#有什么限制" class="md-nav__link">
+    <span class="md-ellipsis">
+      有什么限制?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#服务网格探针" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务网格探针
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="服务网格探针">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#什么是服务网格" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是服务网格
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#探针从哪里采集数据" class="md-nav__link">
+    <span class="md-ellipsis">
+      探针从哪里采集数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#服务网格如何使后端工作" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务网格如何使后端工作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#观测分析平台" class="md-nav__link">
+    <span class="md-ellipsis">
+      观测分析平台
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="观测分析平台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oap-能力" class="md-nav__link">
+    <span class="md-ellipsis">
+      OAP 能力
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oap-中的链路追踪" class="md-nav__link">
+    <span class="md-ellipsis">
+      OAP 中的链路追踪
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oap-中的度量指标" class="md-nav__link">
+    <span class="md-ellipsis">
+      OAP 中的度量指标
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#观测分析语言observability-analysis-language-oal" class="md-nav__link">
+    <span class="md-ellipsis">
+      观测分析语言(Observability Analysis Language, OAL)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="观测分析语言(Observability Analysis Language, OAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#语法" class="md-nav__link">
+    <span class="md-ellipsis">
+      语法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#域scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      域(Scope)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#过滤器filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      过滤器(Filter)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#聚合函数aggregation-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚合函数(Aggregation Function)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#度量指标名称" class="md-nav__link">
+    <span class="md-ellipsis">
+      度量指标名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#组group" class="md-nav__link">
+    <span class="md-ellipsis">
+      组(Group)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#禁用" class="md-nav__link">
+    <span class="md-ellipsis">
+      禁用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#协议" class="md-nav__link">
+    <span class="md-ellipsis">
+      协议
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="协议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#探针协议" class="md-nav__link">
+    <span class="md-ellipsis">
+      探针协议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#注册协议" class="md-nav__link">
+    <span class="md-ellipsis">
+      注册协议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#服务网格探针协议" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务网格探针协议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#查询协议" class="md-nav__link">
+    <span class="md-ellipsis">
+      查询协议
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui可视化" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI可视化
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#服务端ui和cli设置" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务端、UI和CLI设置
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="服务端、UI和CLI设置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#快速入门" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速入门
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速入门">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#默认环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      默认环境
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#部署服务端和界面ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      部署服务端和界面UI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend启动" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend启动
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend启动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#启动脚本" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动脚本
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="启动脚本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#启动模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动模式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="启动模式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#默认模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      默认模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#初始化模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      初始化模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#非初始化模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      非初始化模式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      application.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#高级特性的文档链接列表" class="md-nav__link">
+    <span class="md-ellipsis">
+      高级特性的文档链接列表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-遥测" class="md-nav__link">
+    <span class="md-ellipsis">
+      backend 遥测
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#何时以及为何我们需要设置时区" class="md-nav__link">
+    <span class="md-ellipsis">
+      何时以及为何我们需要设置时区
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#如何通过第三方工具查询存储信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何通过第三方工具查询存储信息?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#启动" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#设置" class="md-nav__link">
+    <span class="md-ellipsis">
+      设置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <a href="../../../../tags/#skywalking" class="md-tag">skywalking</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#java" class="md-tag">java</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#云原生" class="md-tag">云原生</a>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="skywalking教程">Skywalking教程<a class="headerlink" href="#skywalking教程" title="Permanent link">&para;</a></h1>
+<h2 id="概念与设计">概念与设计<a class="headerlink" href="#概念与设计" title="Permanent link">&para;</a></h2>
+<h3 id="什么是skywalking">什么是skywalking?<a class="headerlink" href="#什么是skywalking" title="Permanent link">&para;</a></h3>
+<p>SkyWalking: 一个开源的可观测平台, 用于从服务和云原生基础设施收集, 分析, 聚合及可视化数据。SkyWalking 提供了一种简便的方式来清晰地观测分布式系统, 甚至横跨多个云平台。SkyWalking 更是一个现代化的应用程序性能监控(Application Performance Monitoring)系统, 尤其专为云原生、基于容器的分布式系统设计.</p>
+<!-- more -->
+
+<h3 id="为什么使用-skywalking">为什么使用 SkyWalking?<a class="headerlink" href="#为什么使用-skywalking" title="Permanent link">&para;</a></h3>
+<p>在许多不同的场景下, SkyWalking 为观察和监控分布式系统提供了解决方案。首先是像传统的方式那样, SkyWalking 为服务提供了自动打点的代理, 如 Java, C# , Node.js , Go , PHP 以及 Nginx LUA（包括 Python 和 C++ 调用的 SDK 捐献）。</p>
+<p>对于多数语言，持续部署环境，云原生基础设施正变得更加强大，但也更加复杂。</p>
+<p>Skywalking 的服务网格接收器可以让 Skywalking 接收来自服务网格框架（例如 Istio , Linkerd）的遥测数据，以帮助用户理解整个分布式系统。</p>
+<p>总之, SkyWalking 为 <strong>服务(service)</strong>, <strong>服务实例(service instance)</strong>, 以及 <strong>端点(endpoint)</strong> 提供了可观测能力。服务(Service), 实例(Instance) 以及 端点(Endpoint) 等概念在如今随处可见, 所以让我们先了解一下他们在 SkyWalking 中都表示什么意思：</p>
+<ul>
+<li><strong>服务(Service)</strong>. 表示对请求提供相同行为的一组工作负载. 在使用打点代理或 SDK 的时候,你可以定义服务的名字. SkyWalking 还可以使用在 Istio 等平台中定义的名称。</li>
+<li><strong>服务实例(Service Instance)</strong>. 上述的一组工作负载中的每一个工作负载称为一个实例. 就像 Kubernetes 中的 <code>pods</code> 一样,服务实例未必就是操作系统上的一个进程. 但当你在使用打点代理的时候, 一个服务实例实际就是操作系统上的一个真实进程.</li>
+<li><strong>端点(Endpoint)</strong>. 对于特定服务所接收的请求路径, 如 HTTP 的 URI 路径和 gRPC 服务的类名 + 方法签名。</li>
+</ul>
+<p>使用 SkyWalking 时, 用户可以看到服务与端点之间的拓扑结构, 每个服务/服务实例/端点的性能指标, 还可以设置报警规则。</p>
+<p>除此之外, 你还可以通过以下方式集成</p>
+<ol>
+<li>其他分布式追踪使用 Skywalking 原生代理和Zipkin , Jaeger 和 OpenCensus 的 SDK；</li>
+<li>其他度量指标系统，例如 Prometheus , Sleuth(Micrometer。</li>
+</ol>
+<h3 id="架构">架构<a class="headerlink" href="#架构" title="Permanent link">&para;</a></h3>
+<p>SkyWalking 逻辑上分为四部分: <strong>探针</strong>, <strong>平台后端</strong>, <strong>存储</strong>和<strong>用户界面</strong>.</p>
+<p><img alt="skywalking架构图" src="../../../../skywalking/skywalking%20architecture.png" /></p>
+<ul>
+<li><strong>探针</strong> 收集遥测数据，包括各种格式的度量、跟踪、日志和事件（SkyWalking、Zipkin、OpenTelemetry、Prometheus、Zabbix等）</li>
+<li><strong>平台后端</strong>, 支持数据聚合、分析和流式处理，涵盖跟踪、度量、日志和事件。可担任聚合器角色、接收器角色或两者兼任。</li>
+<li><strong>存储</strong> 通过开放的插件化的接口存放 SkyWalking 数据. 你可以选择一个既有的存储系统, 如 ElasticSearch, H2 或 MySQL 集群(Sharding-Sphere 管理),也可以选择自己实现一个存储系统. 当然, 我们非常欢迎你贡献新的存储系统实现。</li>
+<li><strong>UI</strong> 一个基于接口高度定制化的Web系统，用户可以可视化查看和管理 SkyWalking 数据。</li>
+</ul>
+<h3 id="设计目标">设计目标<a class="headerlink" href="#设计目标" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>保持可观测性</strong>. 不管目标系统如何部署, SkyWalking 总要提供一种方案或集成方式来保持对目标系统的观测, 基于此, SkyWalking 提供了数种运行时探针。</li>
+<li><strong>拓扑结构, 性能指标和追踪一体化</strong>. 理解分布式系统的第一步是通过观察其拓扑结构图. 拓扑图可以将复杂的系统在一张简单的图里面进行可视化展现. 基于拓扑图，运维支撑系统相关人员需要更多关于服务/实例/端点/调用的性能指标. 链路追踪(trace)作为详细的日志, 对于此种性能指标来说很有意义, 如你想知道什么时候端点延时变得很长, 想了解最慢的链路并找出原因. 因此你可以看到, 这些需求都是从大局到细节的, 都缺一不可. SkyWalking 集成并提供了一系列特性来使得这些需求成为可能, 并且使之易于理解.</li>
+<li><strong>轻量级</strong>. 有两个方面需要保持轻量级. (1) 探针, 我们通常依赖于网络传输框架, 如 gRPC. 在这种情况下, 探针就应该尽可能小, 防止依赖库冲突以及虚拟机的负载压力(例如 JVM 永久代内存占用压力). (2) 作为一个观测平台, 在你的整个项目环境中只是次要系统, 因此我们使用自己的轻量级框架来构建后端核心服务. 所以你不需要部署并维护大数据相关的平台, SkyWalking 在技术栈方面应该足够简单。</li>
+<li><strong>可插拔</strong>. SkyWalking 核心团队提供了许多默认实现, 但这肯定是不够的, 也不可能适用于每一种场景, 因此我们提供了大量的特性来支持可插拔功能。</li>
+<li><strong>可移植</strong>. SkyWalking 可以运行在多种环境下, 包括: (1) 使用传统的注册中心, 如 <a href="https://github.com/spring-cloud/spring-cloud-netflix">Eureka</a> (2) 使用包含服务发现的RPC框架，如Spring Cloud, Apache Dubbo (3) 在现代基础设施中使用服务网格 (4) 使用云服务 (5) 跨云部署</li>
+</ul>
+<p>在所有这些情况下，SkyWalking 应该运行良好</p>
+<ul>
+<li><strong>可互操作</strong>. 可观测性是一个庞大的领域, 即使有强大的社区, SkyWalking 不可能支持所有方方面面, 因此 SkyWalking 支持与其他运维支撑系统进行互操作, 主要是探针, 如 Zipkin, Jaeger, OpenTracing 和 OpenCensus. SkyWalking 接收并理解他们的数据格式, 这对于终端用户来说是非常有用的, 因为不需要他们更换已有的库。</li>
+</ul>
+<h2 id="探针">探针<a class="headerlink" href="#探针" title="Permanent link">&para;</a></h2>
+<p>在 SkyWalking 中, 探针表示集成到目标系统中的代理或 SDK 库, 它负责收集遥测数据, 包括链路追踪和性能指标。根据目标系统的技术栈, 探针可能有差异巨大的方式来达到以上功能. 但从根本上来说都是一样的, 即收集并格式化数据, 并发送到后端。</p>
+<p>从高层次上来讲, SkyWalking 探针可分为以下三组：</p>
+<ul>
+<li><strong>基于语言的原生代理</strong>. 这种类型的代理运行在目标服务的用户空间中, 就像用户代码的一部分一样. 如 SkyWalking Java 代理, 使用 <code>-javaagent</code> 命令行参数在运行期间对代码进行操作, <code>操作</code> 一词表示修改并注入用户代码. 另一种代理是使用目标库提供的钩子函数或拦截机制. 如你所见, 这些探针是基于特定的语言和库。</li>
+<li><strong>服务网格探针</strong>. 服务网格探针从服务网格的 Sidecar 和控制面板收集数据. 在以前, 代理只用作整个集群的入口, 但是有了服务网格和 Sidecar 之后, 我们可以基于此进行观测了。</li>
+<li><strong>第三方打点类库</strong>. SkyWalking 也能够接收其他流行的打点库产生的数据格式. SkyWalking 通过分析数据,将数据格式化成自身的链路和度量数据格式. 该功能最初只能接收 Zipkin 的 span 数据。</li>
+</ul>
+<p>你不必同时使用 <strong>基于语言的原生代理</strong> 和 <strong>服务网格探针</strong> ，因为两者都收集指标数据，否则你的系统就要承受双倍负载, 且分析数量会翻倍.</p>
+<p>有如下几种推荐的方式来使用探针:</p>
+<ol>
+<li>只使用 <strong>基于语言的原生代理</strong>.</li>
+<li>只使用 <strong>第三方打点库</strong>, 如 Zipkin 打点系统.</li>
+<li>只使用 <strong>服务网格探针</strong>.</li>
+<li>使用 <strong>服务网格探针</strong>, 配合 <strong>语言原生代理</strong> 或 <strong>第三方打点库</strong>, 来 <strong>追踪状态</strong> . (高级用法)</li>
+</ol>
+<h3 id="服务自动打点代理">服务自动打点代理<a class="headerlink" href="#服务自动打点代理" title="Permanent link">&para;</a></h3>
+<p>服务自动打点代理是基于语言的原生代理的一部分,这种代理需要依靠某些语言特定的特性, 通常是一种基于虚拟机的语言.</p>
+<h3 id="自动打点是什么意思">自动打点是什么意思?<a class="headerlink" href="#自动打点是什么意思" title="Permanent link">&para;</a></h3>
+<p>许多用户都是在听到"他们说不需要改一行代码"之后才了解到这些代理的, SkyWalking 以前也将这种说法放在 README 文档中. 实际上这种说法是既对又错的. 对于最终用户来说是对的, 他们不需要修改代码(至少在绝大多数情况下). 但这种说法也是错的, 因为代码实际上还是被修改了, 只是被代理给修改了, 这种做法通常叫做"在运行时操作代码". 底层原理就是自动打点代理利用了虚拟机提供的用于修改代码的接口来动态加入打点的代码, 如通过 <code>javaagent premain</code> 来修改 Java 类.</p>
+<p>此外, 我们说大部分自动打点代理是基于虚拟机的, 但实际上你也可以在编译期构建这样的工具.</p>
+<h3 id="有什么限制">有什么限制?<a class="headerlink" href="#有什么限制" title="Permanent link">&para;</a></h3>
+<p>自动打点很好用, 你还可以在编译时进行自动打点而不需要依赖虚拟机特性, 那么这里有什么限制吗?</p>
+<p>答案当然是有, 以下就是它们的限制:</p>
+<ul>
+<li><strong>进程内传播在大多数情况下成为可能</strong>. 许多高级编程语言(如 Java, .NET)都是用于构建业务系统. 大部分业务逻辑代码对于每一个请求来说都运行在同一个线程内, 这使得传播是基于线程 ID 的, 以确保上下文是安全的.</li>
+<li><strong>仅仅对某些框架和库奏效</strong>. 因为是代理来在运行时修改代码的, 这也意味着代理插件开发者事先就要知道 所要修改的代码是怎么样的. 因此, 在这种探针下通常会有一个已支持的列表清单. 如 <a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/service-agent/java-agent/Supported-list.md">SkyWalking Java 代理支持列表</a>.</li>
+<li><strong>跨线程可能并非总是奏效</strong>. 如上所述, 每个请求的代码大都运行在一个线程之内, 对于业务代码来说尤其如此. 但是在其他一些场景下, 它们也会在不同线程下工作, 比如指派任务到其他线程, 任务池, 以及批处理. 对于一些语言, 可能还提供了协程或类似的概念如 <code>Goroutine</code>, 使得开发者可以低开销地来执行异步操作, 在这些场景下, 自动打点可能会遇到一些问题.</li>
+</ul>
+<p>所以说自动打点没有什么神秘的, 总而言之就是, 自动打点代理开发者写了一个激活程序, 使得打点的代码 自动运行, 仅此而已.</p>
+<h3 id="服务网格探针">服务网格探针<a class="headerlink" href="#服务网格探针" title="Permanent link">&para;</a></h3>
+<p>服务网格探针使用了服务网格实现者中提供的可扩展机制，比如 Istio。</p>
+<h4 id="什么是服务网格">什么是服务网格<a class="headerlink" href="#什么是服务网格" title="Permanent link">&para;</a></h4>
+<p>下面的解释来自Istio文档。</p>
+<blockquote>
+<p>服务网格通常用于描述组成此类应用程序的微服务网络以及它们之间的交互。随着服务网格的大小和复杂性的增长，它会变得更难理解和管理。它需要包括发现、负载平衡、故障恢复、度量和监视以及更复杂的操作需求A/B测试、金丝雀发布、限流、访问控制和端到端身份验证。</p>
+</blockquote>
+<h4 id="探针从哪里采集数据">探针从哪里采集数据<a class="headerlink" href="#探针从哪里采集数据" title="Permanent link">&para;</a></h4>
+<p>Istio 是一个非常典型的服务网格的设计和实现。它定义了 <strong>控制平面</strong> 和 <strong>数据平面</strong>，被广泛使用。下面是 Istio 的架构 :</p>
+<p><img alt="istio架构" src="../../../../skywalking/istio%E6%9E%B6%E6%9E%84.svg" /></p>
+<p>服务网格探针可以选择从 <strong>控制平面</strong> 和 <strong>数据平面</strong> 采集数据。在 Istio 中，指的是从 Mixer(Control Panel) 或者 Envoy sidecar(Data Panel) 中采集遥测数据。探针从客户端和服务器端收集每个请求的两个遥测实体，它们其实是相同的数据。</p>
+<h4 id="服务网格如何使后端工作">服务网格如何使后端工作<a class="headerlink" href="#服务网格如何使后端工作" title="Permanent link">&para;</a></h4>
+<p>从探针中，您可以看到在这种探针中一定没有相关的跟踪，那么为什么 SkyWalking 平台仍然可以工作？</p>
+<p>服务网格探针从每个请求收集遥测数据，因此它知道源、目标、端点、延迟和状态。通过这些，后端可以通过将这些调用合并为行来描述整个拓扑图，以及每个节点通过传入请求的度量。后端解析跟踪数据，请求相同的度量数据。因此，正确的表述是：</p>
+<p><strong>服务网格度量就是跟踪解析器生成的度量。他们是相同的。</strong></p>
+<h2 id="观测分析平台">观测分析平台<a class="headerlink" href="#观测分析平台" title="Permanent link">&para;</a></h2>
+<p>OAP 观测分析平台(Observability Analysis Platform)是一个从 SkyWalking 6.x 开始出现的新概念. OAP 取代了整个旧的 SkyWalking 后端. OAP 的能力如下所述.</p>
+<h3 id="oap-能力">OAP 能力<a class="headerlink" href="#oap-能力" title="Permanent link">&para;</a></h3>
+<p>OAP 从多种数据源接收数据, 这些数据分为两大类, <strong>链路追踪</strong> 和 <strong>度量指标</strong> .</p>
+<ul>
+<li><strong>链路追踪</strong>. 包括 SkyWalking 原生数据格式, Zipkin V1 和 V2 数据格式, 以及 Jaeger 数据格式.</li>
+<li><strong>度量指标</strong>. SkyWalking 集成了服务网格平台, 如 Istio, Envoy 和 Linkerd, 并在数据面板和控制面板进行观测。此外, SkyWalking 原生代理还可以运行在度量模式, 这极大提升了性能。</li>
+</ul>
+<p>可以同时使用提供的任何集成解决方案，比如 SkyWalking 日志插件或工具包， SkyWalking 还提供了可视化集成来对追踪和日志进行绑定, 这是通过使用 trace id 和 span id 实现的.</p>
+<p>通常所有的服务都是通过 gRPC 和 HTTP 协议实现, 使得未来集成那些尚未支持的生态系统更加容易.</p>
+<h3 id="oap-中的链路追踪">OAP 中的链路追踪<a class="headerlink" href="#oap-中的链路追踪" title="Permanent link">&para;</a></h3>
+<p>链路追踪在 OAP 中的有两种处理.</p>
+<ol>
+<li>在 SkyWalking 5.x 中传统的方式. 以 SkyWalking 的 segment 和 span 来格式化追踪数据，甚至包括 Zipkin 数据格式化。OAP 通过分析数据段获得度量指标, 并将度量数据推送到聚合流。</li>
+<li>考虑仅仅将追踪视为某种日志, 只提供存储和可视化能力.</li>
+</ol>
+<p>同样的, SkyWalking 接收来自其他系统的追踪数据格式, 如 Zipkin, Jaeger, OpenCensus. 这些格式也可以由以上两种方式进行处理.</p>
+<h3 id="oap-中的度量指标">OAP 中的度量指标<a class="headerlink" href="#oap-中的度量指标" title="Permanent link">&para;</a></h3>
+<p>OAP 中的度量指标是 6.x 版本中全新的功能. 通过连接的节点之间的度量数据, 构建分布式系统的观测数据, 且不需要追踪数据.</p>
+<p>度量数据在 OAP 集群中以流的模式进行聚合. 参考<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/concepts-and-designs/oal.md">观测分析语言</a>, 该文介绍了如何使用简单的脚本形式进行数据聚合和分析。</p>
+<h2 id="观测分析语言observability-analysis-language-oal">观测分析语言(Observability Analysis Language, OAL)<a class="headerlink" href="#观测分析语言observability-analysis-language-oal" title="Permanent link">&para;</a></h2>
+<p>在流模式(Streaming mode)下, SkyWalking 提供了 OAL 来分析流入的数据.</p>
+<p>OAL 聚焦于服务, 服务实例以及端点的度量指标, 因此 OAL 非常易于学习和使用.</p>
+<p>6.3版本以后, OAL引擎嵌入在OAP服务器运行时中，称为“OAL -rt”(OAL运行时)。 OAL脚本现在位于' /config '文件夹，用户可以简单地改变和重新启动服务器，使其有效。 但是，OAL脚本仍然是编译语言，OAL运行时动态生成java代码。 您可以在system env上打开set ' SW_OAL_ENGINE_DEBUG=Y '，查看生成了哪些类。</p>
+<h3 id="语法">语法<a class="headerlink" href="#语法" title="Permanent link">&para;</a></h3>
+<p>OAL 脚本文件应该以 <code>.oal</code> 为后缀.</p>
+<div class="highlight"><pre><span></span><code>// Declare the metrics.
+METRICS_NAME = from(SCOPE.(* | [FIELD][,FIELD ...]))
+[.filter(FIELD OP [INT | STRING])]
+.FUNCTION([PARAM][, PARAM ...])
+
+// Disable hard code 
+disable(METRICS_NAME);
+</code></pre></div>
+<h3 id="域scope">域(Scope)<a class="headerlink" href="#域scope" title="Permanent link">&para;</a></h3>
+<p>分析对象包括所有、服务、服务实例、端点、服务关系、服务实例关系、端点关系`. 当然还有一些二级域, 他们都属于以上某个一级域.</p>
+<p>阅读 <a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/concepts-and-designs/scope-definitions.md">Scope Definitions</a>, 你可以在该文中找到所有域和字段定义.</p>
+<h3 id="过滤器filter">过滤器(Filter)<a class="headerlink" href="#过滤器filter" title="Permanent link">&para;</a></h3>
+<p>使用在使用过滤器的时候, 通过指定字段名或表达式来构建字段值的过滤条件.</p>
+<p>表达式可以使用 <code>and</code>, <code>or</code> 和 <code>()</code> 进行组合. 操作符包含 <code>=</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>in (v1, v2, ...</code>, <code>like "%..."</code>, 他们可以基于字段类型进行类型检测, 如果类型不兼容会在编译/代码生成期间报错.</p>
+<h3 id="聚合函数aggregation-function">聚合函数(Aggregation Function)<a class="headerlink" href="#聚合函数aggregation-function" title="Permanent link">&para;</a></h3>
+<p>默认的聚合函数有 SkyWalking OAP 核心实现, 并可自由扩展更多函数.</p>
+<p>提供的函数</p>
+<ul>
+<li><code>longAvg</code>. 某个域实体所有输入的平均值. 输入字段必须是 <code>long</code> 类型.</li>
+</ul>
+<blockquote>
+<p>instance_jvm_memory_max = from(ServiceInstanceJVMMemory.max).longAvg(); 在这个例子中, 输入是 <code>ServiceInstanceJVMMemory</code> 域的每个请求, 平均值是基于字段 <code>max</code> 进行求值的.</p>
+</blockquote>
+<ul>
+<li><code>doubleAvg</code>. 某个域实体的所有输入的平均值. 输入的字段必须是 <code>double</code> 类型.</li>
+</ul>
+<blockquote>
+<p>instance_jvm_cpu = from(ServiceInstanceJVMCPU.usePercent).doubleAvg(); 在这个例子中, 输入是 <code>ServiceInstanceJVMCPU</code> 域的每个请求, 平均值是基于 <code>usePercent</code> 字段进行求值的.</p>
+</blockquote>
+<ul>
+<li><code>percent</code>. 对于输入中匹配指定条件的百分比数.</li>
+</ul>
+<blockquote>
+<p>endpoint_percent = from(Endpoint.*).percent(status == true); 在这个例子中, 输入是每个端点的请求, 条件是 <code>endpoint.status == true</code>.</p>
+</blockquote>
+<ul>
+<li><code>sum</code>. 某个域实体的调用总数.</li>
+</ul>
+<blockquote>
+<p>Service_Calls_Sum = from(Service.*).sum(); 本例统计每个服务的调用数.</p>
+</blockquote>
+<ul>
+<li><code>histogram</code>. Read <a href="https://en.wikipedia.org/wiki/Heat_map">Heatmap in WIKI</a></li>
+</ul>
+<blockquote>
+<p>All_heatmap = from(All.latency).histogram(100, 20); 在这个例子中 传入请求的热力图参数描述如下 参数(1)是计算延迟的精度，例如在上面的例子中，在101-200ms组中，113ms和193ms被认为是相同的. 参数(2)是分组数量。在上述情况下，一共有21组数据分别为0-100ms, 101-200ms，…1901 - 2000ms, 2000ms以上.</p>
+</blockquote>
+<ul>
+<li><code>apdex</code>. Read <a href="https://en.wikipedia.org/wiki/Apdex">Apdex in WIKI</a></li>
+</ul>
+<blockquote>
+<p>service_apdex = from(Service.latency).apdex(name, status); 在本例中，该属性描述的是服务的应用性能指数评分. 参数(1)是服务名称，该阈值可以在配置文件service-apdex-threshold.yml中定义. The parameter (2) is the status of this request. The status(success/failure) effects the Apdex calculation.</p>
+</blockquote>
+<ul>
+<li><code>p99</code>, <code>p95</code>, <code>p90</code>, <code>p75</code>, <code>p50</code>. Read <a href="https://en.wikipedia.org/wiki/Percentile">percentile in WIKI</a></li>
+</ul>
+<blockquote>
+<p>all_percentile = from(All.latency).percentile(10);</p>
+</blockquote>
+<p><strong>百分位</strong>是自7.0版本引入的第一个多值度量。由于有多个值，可以通过' getMultipleLinearIntValues ' GraphQL查询进行查询。 在本例中，所有传入请求的“p99”、“p95”、“p90”、“p75”、“p50”。参数是p99延迟计算的精度，如在上述情况下，120ms和124被认为是相同的。 在7.0.0之前，使用' p99 '、' p95 '、' p90 '、' p75 '、' p50 '函数分别计算指标。在7.x版本仍然支持，但不推荐且不包括在正式脚本。</p>
+<blockquote>
+<p>All_p99 = from(All.latency).p99(10);</p>
+</blockquote>
+<p>在本例中，p99为所有传入请求的值。参数是p99延迟计算的精度，如在上述情况下，120ms和124被认为是相同的。</p>
+<h3 id="度量指标名称">度量指标名称<a class="headerlink" href="#度量指标名称" title="Permanent link">&para;</a></h3>
+<p>存储实现, 报警以及查询模块的度量指标名称. SkyWalking 内核支持自动类型推断.</p>
+<h3 id="组group">组(Group)<a class="headerlink" href="#组group" title="Permanent link">&para;</a></h3>
+<p>所有度量指标数据都会使用 Scope.ID 和最小时间桶(min-level time bucket) 进行分组.</p>
+<ul>
+<li>在端点(Endpoint)域中, Scope.ID = Endpoint 的 ID(基于服务及其端点的唯一标志).</li>
+</ul>
+<h3 id="禁用">禁用<a class="headerlink" href="#禁用" title="Permanent link">&para;</a></h3>
+<p>“Disable”是OAL中的高级语句，只在特定情况下使用。 一些聚合和度量是通过核心硬代码定义的， 这个“禁用”语句是设计用来让它们停止活动的， 比如' segment '， ' top_n_database_statement '。 在默认情况下，没有人是禁用的。</p>
+<h3 id="示例">示例<a class="headerlink" href="#示例" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>// 计算 Endpoint1 和 Endpoint2 的 p99 值
+Endpoint_p99 = from(Endpoint.latency).filter(name in (&quot;Endpoint1&quot;, &quot;Endpoint2&quot;)).summary(0.99)
+
+// 计算端点名以 `serv` 开头的端点的 p99 值
+serv_Endpoint_p99 = from(Endpoint.latency).filter(name like (&quot;serv%&quot;)).summary(0.99)
+
+// 计算每个端点的响应平均时长
+Endpoint_avg = from(Endpoint.latency).avg()
+
+// 计算每个端点 p50, p75, p90, p95 and p99 的延迟柱状图, 每隔 50 毫秒一条柱
+Endpoint_percentile = from(Endpoint.latency).percentile(10)
+
+// 统计每个服务响应状态为 true 的百分比
+Endpoint_success = from(Endpoint.*).filter(status = &quot;true&quot;).percent()
+
+// 统计每个服务响应码在 [200, 299] 之间的百分比
+Endpoint_200 = from(Endpoint.*).filter(responseCode like &quot;2%&quot;).percent()
+
+// 统计每个服务响应码在 [500, 599] 之间的百分比
+Endpoint_500 = from(Endpoint.*).filter(responseCode like &quot;5%&quot;).percent()
+
+// 统计每个服务的调用总量
+EndpointCalls = from(Endpoint.*).sum()
+
+disable(segment);
+disable(endpoint_relation_server_side);
+disable(top_n_database_statement);
+</code></pre></div>
+<h2 id="协议">协议<a class="headerlink" href="#协议" title="Permanent link">&para;</a></h2>
+<p>有以下两种类型的协议.</p>
+<ul>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/README.md#探针协议"><strong>探针协议</strong></a>. 包括对探针如何发送收集到的度量数据、跟踪信息以及涉及到的每个实体格式的描述和定义。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/README.md#查询协议"><strong>查询协议</strong></a>. 服务后端给 SkyWalking 自有的 UI 和任何第三方 UI 提供了查询的能力. 这些查询都是基于 GraphQL 的.</li>
+</ul>
+<h3 id="探针协议">探针协议<a class="headerlink" href="#探针协议" title="Permanent link">&para;</a></h3>
+<p>它们也是与探针的组相关的, 为了理解这一点, 请参考<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/concepts-and-designs/README.md">概念和设计</a>一文. 这些探针组是<strong>基于原生语言代理协议</strong>, <strong>服务网格协议</strong>以及其他第三方打点协议.</p>
+<h3 id="注册协议">注册协议<a class="headerlink" href="#注册协议" title="Permanent link">&para;</a></h3>
+<p>包含服务, 服务实例, 网络地址以及端点元数据注册. 注册的目的是:</p>
+<ol>
+<li>对于服务, 网络地址和端点, 注册之后将会返回注册对象的一个唯一 ID, 通常是一个整数. 探针可以使用这个 ID 来替代字符串文本, 达到数据压缩的功能. 进一步讲, 有些协议只接收 ID.</li>
+<li>对于服务实例, 注册之后将会为每个新的实例返回一个新的唯一 ID. 每个服务实例必须包含服务 ID.</li>
+</ol>
+<p>基于语言的原生代理协议</p>
+<p>有以下两种协议可以让基于语言的代理在分布式环境下工作.</p>
+<ol>
+<li><strong>跨进程传播的头部协议</strong>是一种有线数据格式, 代理和 SDK 通常使用 RPC 请求以及 HTTP/MQ/HTTP2 请求头来运载数据. 远程代理将在请求处理器中接收这些数据, 并将上下文绑定到该请求中.</li>
+<li><strong>追踪数据协议</strong>是一种离线数据格式, 代理和 SDK 使用这种数据格式来发送追踪数据和指标数据到 SkyWalking 或其他兼容的后端。</li>
+</ol>
+<p>为了兼容性, 请求头有两种格式. 默认是使用 v2.</p>
+<ul>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/Skywalking-Cross-Process-Propagation-Headers-Protocol-v2.md">跨进程传播的请求头 v2</a> 是自 6.0.0-beta 版本开始, 针对在线上下文传播的一种新的协议. 它将在以后替代老的 <strong>SW3</strong> 协议, 目前来说它们二者都是支持的.</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/Skywalking-Cross-Process-Propagation-Headers-Protocol-v1.md">跨进程传播的请求头 v1</a> 是针对在线传播的协议. 遵循此协议的不同进程的追踪数据段可以被连接起来.</li>
+</ul>
+<p>自 SkyWalking v6.0.0-beta 开始, SkyWalking 代理和后端都使用第二版的追踪数据协议(Trace Data Protocol v2), 后端仍然支持 v1 版本的协议.</p>
+<ul>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/Trace-Data-Protocol-v2.md">SkyWalking 追踪数据协议 v2</a> 定义了代理和后端之间通讯的方式和格式.</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/Trace-Data-Protocol.md">SkyWalking 追踪数据协议 v1</a>. 该协议用于旧的版本中. 目前仍然支持.</li>
+</ul>
+<h3 id="服务网格探针协议">服务网格探针协议<a class="headerlink" href="#服务网格探针协议" title="Permanent link">&para;</a></h3>
+<p>Sidecar 中的探针或代理可以使用该协议发送数据到后端. 该服务通过 gRPC 实现, 需要以下关键信息:</p>
+<ol>
+<li>在服务两侧都需要服务名或 ID</li>
+<li>在服务两侧都需要服务实例名称或 ID</li>
+<li>端点. HTTP 中的 URI, gRPC 中的方法完整签名.</li>
+<li>时延. 以毫秒为单位</li>
+<li>HTTP 中的响应码</li>
+<li>状态. 成功或失败</li>
+<li>协议. HTTP, gRPC 等</li>
+<li>监测点. 在服务网格 sidecar 中, <code>client</code> 或 <code>server</code>。 在普通的 L7 代理中, 值是 <code>proxy</code>.</li>
+</ol>
+<p>第三方打点协议</p>
+<p>SkyWalking 并不定义第三方打点协议. 它们只是协议和数据格式, SkyWalking 兼容这些协议和数据格式, 且可以接收它们. SkyWalking 一开始就支持 Zipkin v1, v2 数据格式. 后端遵循模块化原则, 所以要扩展新的接收器以支持新的协议和格式是非常容易的.</p>
+<h3 id="查询协议">查询协议<a class="headerlink" href="#查询协议" title="Permanent link">&para;</a></h3>
+<p>查询协议遵循 GraphQL 语法, 提供了数据查询能力, 这都取决于你要分析的指标.</p>
+<p>实际的查询 GraphQL 脚本可以在 <code>query-protocol</code> <a href="https://github.com/apache/skywalking/tree/master/oap-server/server-query-plugin/query-graphql-plugin/src/main/resources">文件夹</a>内找到.</p>
+<h2 id="ui可视化">UI可视化<a class="headerlink" href="#ui可视化" title="Permanent link">&para;</a></h2>
+<p>SkyWalking 原生 UI 提供了一种默认的可视化方案. 它提供了关于总览, 服务, 服务实例, 端点, 追踪和报警相关的观测图, 包括了拓扑图, 依赖图, 热点图等等.</p>
+<p>而且，我们已经知道，我们的许多用户在产品中已经集成了SkyWalking。 如果你也想这样做，请参考<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/protocols/README.md#query-protocol">skywalk查询协议</a>。</p>
+<h2 id="服务端ui和cli设置">服务端、UI和CLI设置<a class="headerlink" href="#服务端ui和cli设置" title="Permanent link">&para;</a></h2>
+<p>SkyWalking 后端发布包主要分以下几块内容;</p>
+<ol>
+<li><strong>启动脚本</strong>, <code>/bin</code> 目录. 包含linux启动和Windows启动服务和UI的脚本.</li>
+<li><strong>配置文件</strong>, <code>/config</code> 目录. 包含以下配置文件.</li>
+<li><code>application.yml</code></li>
+<li><code>log4j.xml</code></li>
+<li><code>alarm-settings.yml</code></li>
+<li><strong>引用Jar</strong>, <code>/oap-libs</code> 目录. 包含服务端所有依赖的jar包.</li>
+<li><strong>Webapp相关</strong>, <code>webapp</code> 目录. 包含UI界面的jar和 <code>webapp.yml</code>的配置文件.</li>
+</ol>
+<h3 id="快速入门">快速入门<a class="headerlink" href="#快速入门" title="Permanent link">&para;</a></h3>
+<h4 id="默认环境">默认环境<a class="headerlink" href="#默认环境" title="Permanent link">&para;</a></h4>
+<p>需要: <strong>JDK8到JDK12已测试</strong>，其他版本未测试.</p>
+<p>在看这个之前，希望你知道，快速入门只是是运行Skywalking的Backend和UI来进行预览或演示。在这儿，性能和长期运行不是本章节内容。</p>
+<p>想部署到product或test等环境查看<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-ui-setup.md#部署Backend和UI">部署服务端和界面UI</a></p>
+<p>你可以通过<code>bin/startup.sh</code>(或cmd) 在默认设置下启动Backend和UI,，同时希望你能了解：</p>
+<ul>
+<li>默认使用H2存储，这样就不需要部署别的了。</li>
+<li>Backend的gRPC相关的API可访问<code>0.0.0.0/11800</code>，rest相关的API可访问<code>0.0.0.0/12800</code>。</li>
+</ul>
+<p>在Java，.NetCore，Node.js， Istio agents/probe中，设置gRPC服务地址为<code>ip/host:11800</code>。 (ip/host填写Backend暴露的)</p>
+<ul>
+<li>UI 监听<code>8080</code> 端口,同时请求<code>127.0.0.1/12800</code>来做GraphQL查询。</li>
+</ul>
+<h3 id="部署服务端和界面ui">部署服务端和界面UI<a class="headerlink" href="#部署服务端和界面ui" title="Permanent link">&para;</a></h3>
+<p>快速入门后，您应该希望在分布式环境中部署后端和UI。 在那之前， 你需要知道agent/probe, Backend和UI之间是怎么交互的。</p>
+<p><img alt="ui后端存储交互" src="../../../../skywalking/ui%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E4%BA%A4%E4%BA%92.png" /></p>
+<ul>
+<li>所有原生的agents和probes，不管基于何种语言或网格探针，都是使用gRPC服务(<code>core/default/gRPC*</code> in <code>application.yml</code>) 上报数据给服务端。另外，json格式支持Jetty服务。</li>
+<li>UI 使用GraphQL(HTTP)查询来访问Backend，在Jetty服务中也是(<code>core/default/rest*</code> in <code>application.yml</code>)。</li>
+</ul>
+<h2 id="backend启动">Backend启动<a class="headerlink" href="#backend启动" title="Permanent link">&para;</a></h2>
+<p>首先也是最重要的是，Skywalking backend启动行为由<code>config/application.yml</code>驱动。 了解这个设置文件将帮助您阅读此文档。</p>
+<h4 id="启动脚本">启动脚本<a class="headerlink" href="#启动脚本" title="Permanent link">&para;</a></h4>
+<p>默认的启动脚本是<code>/bin/oapService.sh</code>(.bat)。 </p>
+<h5 id="启动模式">启动模式<a class="headerlink" href="#启动模式" title="Permanent link">&para;</a></h5>
+<p>在不同的部署工具（如K8S）中，可能需要不同的启动模式。 我们还提供另外两种可选的启动模式。</p>
+<h6 id="默认模式">默认模式<a class="headerlink" href="#默认模式" title="Permanent link">&para;</a></h6>
+<p>默认模式。如果需要，进行初始化工作，启动监听并提供服务。</p>
+<p>运行 <code>/bin/oapService.sh</code>(.bat) 来启动这个模式。也可以在使用 <code>startup.sh</code>(.bat)来启动。</p>
+<h6 id="初始化模式">初始化模式<a class="headerlink" href="#初始化模式" title="Permanent link">&para;</a></h6>
+<p>在此模式下，OAP服务器启动以执行初始化工作，然后退出。 您可以使用此模式初始化存储，例如ElasticSearch索引、MySQL和TIDB表，和init数据。</p>
+<p>运行 <code>/bin/oapServiceInit.sh</code>(.bat) 来启动这个模式。</p>
+<h6 id="非初始化模式">非初始化模式<a class="headerlink" href="#非初始化模式" title="Permanent link">&para;</a></h6>
+<p>在此模式下，OAP服务器不进行初始化。 但它等待存在弹性搜索索引、mysql和tidb表，开始倾听并提供服务。意味着此OAP服务希望别的OAP服务器进行初始化。</p>
+<p>运行 <code>/bin/oapServiceNoInit.sh</code>(.bat) 来启动这个模式。</p>
+<h4 id="applicationyml">application.yml<a class="headerlink" href="#applicationyml" title="Permanent link">&para;</a></h4>
+<p>这个设置文件背后的核心概念是，Skywalking的Collector基于纯模块化设计。 最终用户可以根据自己的需求切换或组装收集器功能。</p>
+<p>所有, 在<code>application.yml</code>里有三个级别。</p>
+<ol>
+<li><strong>Level 1</strong>, 模块名。模块定义项。</li>
+<li><strong>Level 2</strong>, 模块类型。 设置模块类型。</li>
+<li><strong>Level 3</strong>. 类型属性。</li>
+</ol>
+<p>例如:</p>
+<div class="highlight"><pre><span></span><code>storage:
+  selector: mysql # the mysql storage will actually be activated, while the h2 storage takes no effect
+  h2:
+    driver: ${SW_STORAGE_H2_DRIVER:org.h2.jdbcx.JdbcDataSource}
+    url: ${SW_STORAGE_H2_URL:jdbc:h2:mem:skywalking-oap-db}
+    user: ${SW_STORAGE_H2_USER:sa}
+    metadataQueryMaxSize: ${SW_STORAGE_H2_QUERY_MAX_SIZE:5000}
+  mysql:
+    properties:
+      jdbcUrl: ${SW_JDBC_URL:&quot;jdbc:mysql://localhost:3306/swtest&quot;}
+      dataSource.user: ${SW_DATA_SOURCE_USER:root}
+      dataSource.password: ${SW_DATA_SOURCE_PASSWORD:root@1234}
+      dataSource.cachePrepStmts: ${SW_DATA_SOURCE_CACHE_PREP_STMTS:true}
+      dataSource.prepStmtCacheSize: ${SW_DATA_SOURCE_PREP_STMT_CACHE_SQL_SIZE:250}
+      dataSource.prepStmtCacheSqlLimit: ${SW_DATA_SOURCE_PREP_STMT_CACHE_SQL_LIMIT:2048}
+      dataSource.useServerPrepStmts: ${SW_DATA_SOURCE_USE_SERVER_PREP_STMTS:true}
+    metadataQueryMaxSize: ${SW_STORAGE_MYSQL_QUERY_MAX_SIZE:5000}
+  # other configurations
+</code></pre></div>
+<ol>
+<li><strong><code>storage</code></strong> is the 模块名.</li>
+<li><strong><code>selector</code></strong> 模块类型.</li>
+<li><strong><code>default</code></strong> 模块默认属性.</li>
+<li><code>driver</code>, <code>url</code>, ... <code>metadataQueryMaxSize</code> 类型属性.</li>
+</ol>
+<p>同时，模块包括必修模块和可选模块，必修模块提供后端框架， 即使模块化支持可插拔，删除这些模块是没有意义的，对于可选模块，其中一些有 一个名为“none”的提供程序实现，这意味着它只提供一个没有实际逻辑的shell，典型的例子是telemetry。 将“-”设置为“selector”意味着在运行时将排除整个模块。 我们强烈建议您不要尝试更改这些模块的api，除非你非常了解SkyWalking项目及其代码。</p>
+<p>必须的模块列表</p>
+<ol>
+<li><strong>Core</strong>。做所有数据分析和流调度的基本和主要框架。</li>
+<li><strong>Cluster</strong>。管理集群中的多个后端实例，这可以提供高吞吐量的处理能力。</li>
+<li><strong>Storage</strong>。持久化分析结果。</li>
+<li><strong>Query</strong>。提供查询接口给UI。</li>
+</ol>
+<p>对于<strong>Cluster</strong> 和<strong>Storage</strong> 有多个实现者(提供者), 查看 <strong>Cluster management</strong> 和 <strong>Choose storage</strong> 的<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-setup.md#advanced-feature-document-link-list">link list</a>文档。</p>
+<p>一些<strong>receiver</strong> 模块也提供了。 Receiver是一个模块，负责接受后端的传入数据请求。大多数（所有）通过一些rpc协议，如GRPC和HTTPrestful提供。 Receiver有许多不同的模块名，你可以阅读<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-setup.md#advanced-feature-document-link-list">link list</a>中的<strong>Set receivers</strong>文档。</p>
+<h4 id="高级特性的文档链接列表">高级特性的文档链接列表<a class="headerlink" href="#高级特性的文档链接列表" title="Permanent link">&para;</a></h4>
+<p>在理解了设置文件结构之后，您可以选择您感兴趣的功能文档。 我们建议您按照以下顺序阅读功能文档。</p>
+<ol>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-setting-override.md">Overriding settings</a>。支持重写application.yml中的设置。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-ip-port.md">IP and port setting</a>。介绍如何设置和使用IP和端口。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-init-mode.md">Backend init mode startup</a>。如何初始化环境并优雅地退出。 在尝试初始化新群集之前，请阅读此内容。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-cluster.md">Cluster management</a>。指导您将backend服务器设置为群集模式。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-k8s.md">Deploy in kubernetes</a>.。指导您构建和使用Skywalking镜像，并在K8S中部署。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-storage.md">Choose storage</a>.如我们所知，在默认的快速启动中，backend 使用h2数据库运行。但显然，它不符合产品环境。在这里，你可以找到其他的选择。 选择你喜欢的，我们也欢迎任何人贡献新的存储实施者，</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-receivers.md">Set receivers</a>。 你可以根据你的要求选择接收者，大多数接收者是无害的，至少我们的默认接收器是无害的。您可以设置并激活所有提供的接收器。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-fetcher.md">Open fetchers</a>. 你可以从目标应用程序读取指标。它们的工作原理就像接收器，但在拉取模式下，就像典型的普罗米修斯.</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-token-auth.md">Token authentication</a>. 你可以添加令牌身份验证机制，以避免“OAP”接收不可信的数据.</li>
+<li>在backend进行<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/trace-sampling.md">trace sampling</a> 。 此示例保持度量的准确性，但不保存某些存储中依赖于速率的traces。</li>
+<li>根据 <a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/slow-db-statement.md">slow DB statement threshold</a> 配置文档可了解如何检测系统中的慢速数据库语句（包括SQL语句）。</li>
+<li>官方 <a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/guides/backend-oal-scripts.md">OAL scripts</a>。正如您从我们的<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/concepts-and-designs/oal.md">OAL introduction</a>中所知， 大多数backend分析功能都基于脚本。这是对官方手稿的描述，这有助于您了解正在处理的度量数据，也可以用于警报。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-alarm.md">Alarm</a>. 告警提供基于时间序列的检查机制。你可以设置针对分析OAL度量对象的告警规则。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/advanced-deployment.md">Advanced deployment options</a>。如果你需要部署的backend有很大的扩展性并支持高负载，你需要看看这个。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/metrics-exporter.md">Metrics exporter</a>. 使用metrics data导出器将metric数据转发给第三方系统。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/ttl.md">Time To Live (TTL)</a>. Metrics 和 trace 是时间序列数据, 因此可能会被永久存储, 你可以设置各个维度的过期时间。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/dynamic-config.md">Dynamic Configuration</a>. 从远程服务拉取动态改变OAP配置或第三方配置。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/uninstrumented-gateways.md">Uninstrumented Gateways</a>. 配置SkyWalking代理插件不支持的网关/代理，在拓扑图中反映委托信息。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/apdex-threshold.md">Apdex threshold</a>. 如果在OAL中激活Apdex计算，则需要为不同的服务配置阈值。</li>
+<li><a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/endpoint-grouping-rules.md">Group Parameterized Endpoints</a>. 为参数化端点配置分组规则，以改进指标的意义。</li>
+</ol>
+<h4 id="backend-遥测">backend 遥测<a class="headerlink" href="#backend-遥测" title="Permanent link">&para;</a></h4>
+<p>OAP后端集群本身的底层是一个分布式流处理系统。为了帮助运营团队，我们为OAP后端本身提供遥测。按照<a href="https://github.com/SkyAPM/document-cn-translation-of-skywalking/blob/master/docs/zh/8.0.0/setup/backend/backend-telemetry.md">document</a>使用它。</p>
+<h4 id="faqs">FAQs<a class="headerlink" href="#faqs" title="Permanent link">&para;</a></h4>
+<h5 id="何时以及为何我们需要设置时区">何时以及为何我们需要设置时区<a class="headerlink" href="#何时以及为何我们需要设置时区" title="Permanent link">&para;</a></h5>
+<p>SkyWalking 提供了降取样时间序列指标的功能. 根据各个时间维度(如分钟, 小时, 天, 月)进行查询和存储时的时间格式化会涉及到时区。</p>
+<p>比如说, 按分钟维度的指标时间将会被格式化成 YYYYMMDDHHmm 格式, 格式化过程是和时区相关的。</p>
+<p>默认情况下, SkyWalking OAP 后端选择操作系统的默认时区, 如果你想覆盖这个行为, 请按照普通 Java 程序和操作系统设置的相关文档进行设置。</p>
+<h5 id="如何通过第三方工具查询存储信息">如何通过第三方工具查询存储信息?<a class="headerlink" href="#如何通过第三方工具查询存储信息" title="Permanent link">&para;</a></h5>
+<p>SkyWalking提供了浏览器UI、CLI和GraphQL方式来支持扩展. 但有些用户可能会想到直接从存储中查询数据。 比如在ElasticSearch的例子中，Kibana就是一个很好的工具。</p>
+<p>在默认情况下，由于减少内存、网络和存储空间的使用, skywalk只在实体中保存id，而元数据只保存在“*_inventory”实体中。 在这种特殊情况下这些工具通常不支持嵌套查询，或者工作起来不方便。 SkyWalking提供了一个配置，将所有必要的name列添加到最终的度量实体中，以ID作为权衡。</p>
+<p>看一下'application.yaml'中配置“core/default/activeExtraModelColumns”，并将其设置为true以打开该特性。</p>
+<p>这个特性不会为本地的skywalk场景提供任何新特性，只用于第三方集成。</p>
+<h3 id="ui">UI<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h3>
+<p>Skywalking UI的发行版已经包含在我们的Apache官方版本中。</p>
+<h4 id="启动">启动<a class="headerlink" href="#启动" title="Permanent link">&para;</a></h4>
+<p>启动脚本也在<code>/bin/webappService.sh</code>(.bat). UI 运行一个java进程，用的zuul框架。</p>
+<h4 id="设置">设置<a class="headerlink" href="#设置" title="Permanent link">&para;</a></h4>
+<p>UI的设置文件是发行包里的<code>webapp/webapp.yml</code>。它由三个部分组成。</p>
+<ol>
+<li>监听端口</li>
+<li>配置转发连接信息</li>
+</ol>
+<div class="highlight"><pre><span></span><code>server:
+  port: 8080
+
+collector:
+  path: /graphql
+  ribbon:
+    ReadTimeout: 10000
+    # Point to all backend&#39;s restHost:restPort, split by , 
+    listOfServers: 10.2.34.1:12800,10.2.34.2:12800
+</code></pre></div>
+<h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>skywalking中文文档，现在就维护到8.0.0 </p>
+</li>
+<li></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+  data-repo="leoalasiga/myGicus"
+  data-repo-id="R_kgDOL_8gew"
+  data-category="General"
+  data-category-id="DIC_kwDOL_8ge84Cfk89"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="1"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async>
+</script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+        
+          
+          <a href="../%E7%99%BD%E5%AB%96githubpage%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B8%80/" class="md-footer__link md-footer__link--next" aria-label="下一页: 白嫖GithubPage搭建自己的博客!（一）">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                白嫖GithubPage搭建自己的博客!（一）
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 leoalasiaga
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/leoalasiga" target="_blank" rel="noopener" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://leoalasiga.github.io" target="_blank" rel="noopener me" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.5 102.5 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5m-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.top", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.prune", "navigation.footer", "content.code.annotate", "content.code.copy", "toc.integrate", "toc.follow", "search.suggest", "search.highlight", "search.share", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

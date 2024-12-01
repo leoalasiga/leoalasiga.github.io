@@ -1,0 +1,2270 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Blogs record by Leoalsiga">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/2024/12/01/vim%E5%85%A5%E9%97%A8%E8%BD%AC%E8%BD%BD/">
+      
+      
+        <link rel="prev" href="../../../11/25/jvm%E6%95%85%E9%9A%9C%E5%88%86%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%BF%E7%94%A8jstack%E5%AE%9A%E4%BD%8D%E7%BA%BF%E7%A8%8B%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF%E8%BD%AC%E8%BD%BD/">
+      
+      
+        <link rel="next" href="../http%E7%8A%B6%E6%80%81%E7%A0%81/">
+      
+      
+      <link rel="icon" href="../../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>Vim入门(转载) - Leoalasiga Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Mono";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vim入门转载" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-header__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Leoalasiga Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vim入门(转载)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+    
+  
+  主页
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../tags/" class="md-tabs__link">
+          
+  
+    
+  
+  分类
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../contact/" class="md-tabs__link">
+          
+  
+    
+  
+  联系我
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../link/" class="md-tabs__link">
+          
+  
+    
+  
+  友链
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-nav__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    Leoalasiga Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            主页
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../tags/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    分类
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../contact/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    联系我
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../link/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/39647836?s%E2%80%A600&u=ebd5960bd9de24b76570524e4a1a148bd6339b35&v=4" alt="leoalasiga">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          leoalasiga
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-01 00:00:00+00:00" class="md-ellipsis">2024/12/1</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 8 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1vim的几种模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.Vim的几种模式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2启动vim" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.启动Vim
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3文档的操作" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.文档的操作
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4光标的移动" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.光标的移动
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.光标的移动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-基本移动" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 基本移动
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-翻屏" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 翻屏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-标记" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 标记
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5插入文本" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.插入文本
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.插入文本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-基本插入" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 基本插入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-改写插入" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 改写插入
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6剪切复制和寄存器" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.剪切复制和寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.剪切复制和寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-剪切和复制粘贴" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 剪切和复制、粘贴
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-文本对象" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 文本对象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-寄存器" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 寄存器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7查找与替换" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.查找与替换
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.查找与替换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-查找" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 查找
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-替换" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 替换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-正则表达式" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 正则表达式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8排版" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.排版
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.排版">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-基本排版" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 基本排版
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-拼写检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 拼写检查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-统计字数" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 统计字数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9编辑多个文件" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.编辑多个文件
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.编辑多个文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-一次编辑多个文件" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 一次编辑多个文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-多标签编辑" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 多标签编辑
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-缓冲区" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 缓冲区
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10分屏编辑" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.分屏编辑
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.分屏编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-水平分割" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 水平分割
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-垂直分割" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 垂直分割
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-关闭子窗口" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 关闭子窗口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-调整窗口大小" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.4 调整窗口大小
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-切换和移动窗口" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5 切换和移动窗口
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11快速编辑" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.快速编辑
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.快速编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-改变大小写" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1 改变大小写
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-替换normal模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2 替换（normal模式）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-撤消与重做normal模式" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3 撤消与重做（normal模式）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-宏---重复上一个编辑动作" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.4 宏. --重复上一个编辑动作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12编辑特殊文件" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.编辑特殊文件
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.编辑特殊文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-文件加解密" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 文件加解密
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-文件的编码" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 文件的编码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-文件格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 文件格式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13编程辅助" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.编程辅助
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.编程辅助">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-一些按键" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.1 一些按键
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-ctags" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.2 ctags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-cscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.3 cscope
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-gtags" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.4 gtags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-编译" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.5 编译
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#136-快速修改窗口" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.6 快速修改窗口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#137-自动补全" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.7 自动补全
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#138-多行缩进缩出" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.8 多行缩进缩出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#139-折叠" class="md-nav__link">
+    <span class="md-ellipsis">
+      13.9 折叠
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14命令行" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.命令行
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.命令行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-命令行模式下的快捷键" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.1 命令行模式下的快捷键
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-执行外部命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.2 执行外部命令
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15其它" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.其它
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.其它">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-工作目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.1 工作目录
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-一些快捷键" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2 一些快捷键
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-在线帮助" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.3 在线帮助
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-一些小功能" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4 一些小功能
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <a href="../../../../tags/#vim" class="md-tag">vim</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#linux" class="md-tag">linux</a>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="vim入门转载">Vim入门(转载)<a class="headerlink" href="#vim入门转载" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>转载自 <a href="https://www.cnblogs.com/jiqingwu/archive/2012/06/14/vim_notes.html#id86">vim使用笔记</a></p>
+</blockquote>
+<!-- more -->
+
+<h2 id="1vim的几种模式">1.Vim的几种模式<a class="headerlink" href="#1vim的几种模式" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>正常模式：可以使用快捷键命令，或按:输入命令行。</p>
+</li>
+<li>
+<p>插入模式：可以输入文本，在正常模式下，按i、a、o等都可以进入插入模式。</p>
+</li>
+<li>可视模式：正常模式下按v可以进入可视模式， 在可视模式下，移动光标可以选择文本。按V进入可视行模式， 总是整行整行的选中。ctrl+v进入可视块模式。</li>
+<li>替换模式：正常模式下，按R进入。</li>
+</ul>
+<h2 id="2启动vim">2.启动Vim<a class="headerlink" href="#2启动vim" title="Permanent link">&para;</a></h2>
+<ul>
+<li>vim -c cmd file: 在打开文件前，先执行指定的命令；</li>
+<li>vim -r file: 恢复上次异常退出的文件；</li>
+<li>vim -R file: 以只读的方式打开文件，但可以强制保存；</li>
+<li>vim -M file: 以只读的方式打开文件，不可以强制保存；</li>
+<li>vim -y num file: 将编辑窗口的大小设为num行；</li>
+<li>vim + file: 从文件的末尾开始；</li>
+<li>vim +num file: 从第num行开始；</li>
+<li>vim +/string file: 打开file，并将光标停留在第一个找到的string上。</li>
+<li>vim --remote file: 用已有的vim进程打开指定的文件。 如果你不想启用多个vim会话，这个很有用。但要注意， 如果你用vim，会寻找名叫VIM的服务器；如果你已经有一个gvim在运行了， 你可以用gvim --remote file在已有的gvim中打开文件。</li>
+</ul>
+<h2 id="3文档的操作">3.文档的操作<a class="headerlink" href="#3文档的操作" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>:e file --关闭当前编辑的文件，并开启新的文件。 如果对当前文件的修改未保存，vi会警告。</p>
+</li>
+<li>
+<p>:e! file --放弃对当前文件的修改，编辑新的文件。</p>
+</li>
+<li>
+<p>:e+file -- 开始新的文件，并从文件尾开始编辑。</p>
+</li>
+<li>
+<p>:e+n file -- 开始新的文件，并从第n行开始编辑。</p>
+</li>
+<li>
+<p>:enew --编译一个未命名的新文档。(CTRL-W n)</p>
+</li>
+<li>
+<p>:e -- 重新加载当前文档。</p>
+</li>
+<li>
+<p>:e! -- 重新加载当前文档，并丢弃已做的改动。</p>
+</li>
+<li>
+<p>:e#或ctrl+^ -- 回到刚才编辑的文件，很实用。</p>
+</li>
+<li>
+<p>:f或ctrl+g -- 显示文档名，是否修改，和光标位置。</p>
+</li>
+<li>
+<p>:f filename -- 改变编辑的文件名，这时再保存相当于另存为。</p>
+</li>
+<li>
+<p>gf -- 打开以光标所在字符串为文件名的文件。</p>
+</li>
+<li>
+<p>:w -- 保存修改。</p>
+</li>
+<li>
+<p>:n1,n2w filename -- 选择性保存从某n1行到另n2行的内容。</p>
+</li>
+<li>
+<p>:wq -- 保存并退出。</p>
+</li>
+<li>
+<p>ZZ -- 保存并退出。</p>
+</li>
+<li>
+<p>:x -- 保存并退出。</p>
+</li>
+<li>
+<p>:q[uit] ——退出当前窗口。(CTRL-W q或CTRL-W CTRL-Q)</p>
+</li>
+<li>
+<p>:saveas newfilename -- 另存为</p>
+</li>
+<li>
+<p>:browse e -- 会打开一个文件浏览器让你选择要编辑的文件。 如果是终端中，则会打开netrw的文件浏览窗口； 如果是gvim，则会打开一个图形界面的浏览窗口。 实际上:browse后可以跟任何编辑文档的命令，如sp等。 用browse打开的起始目录可以由browsedir来设置：</p>
+</li>
+<li>
+<ul>
+<li>:set browsedir=last -- 用上次访问过的目录（默认）；</li>
+</ul>
+</li>
+<li>:set browsedir=buffer -- 用当前文件所在目录；</li>
+<li>
+<p>:set browsedir=current -- 用当前工作目录；</p>
+</li>
+<li>
+<p>:Sex -- 水平分割一个窗口，浏览文件系统；</p>
+</li>
+<li>
+<p>:Vex -- 垂直分割一个窗口，浏览文件系统；</p>
+</li>
+</ul>
+<h2 id="4光标的移动">4.光标的移动<a class="headerlink" href="#4光标的移动" title="Permanent link">&para;</a></h2>
+<h3 id="41-基本移动">4.1 基本移动<a class="headerlink" href="#41-基本移动" title="Permanent link">&para;</a></h3>
+<p>以下移动都是在normal模式下。</p>
+<ul>
+<li>h或退格: 左移一个字符；</li>
+<li>l或空格: 右移一个字符；</li>
+<li>j: 下移一行；</li>
+<li>k: 上移一行；</li>
+<li>gj: 移动到一段内的下一行；</li>
+<li>gk: 移动到一段内的上一行；</li>
+<li>+或Enter: 把光标移至下一行第一个非空白字符。</li>
+<li>-: 把光标移至上一行第一个非空白字符。</li>
+<li>w: 前移一个单词，光标停在下一个单词开头；</li>
+<li>W: 移动下一个单词开头，但忽略一些标点；</li>
+<li>e: 前移一个单词，光标停在下一个单词末尾；</li>
+<li>E: 移动到下一个单词末尾，如果词尾有标点，则移动到标点；</li>
+<li>b: 后移一个单词，光标停在上一个单词开头；</li>
+<li>B: 移动到上一个单词开头，忽略一些标点；</li>
+<li>ge: 后移一个单词，光标停在上一个单词末尾；</li>
+<li>
+<p>gE: 同 ge ，不过‘单词’包含单词相邻的标点。</p>
+</li>
+<li>
+<p>(: 前移1句。</p>
+</li>
+<li>): 后移1句。</li>
+<li>{: 前移1段。</li>
+<li>}: 后移1段。</li>
+<li>fc: 把光标移到同一行的下一个c字符处</li>
+<li>Fc: 把光标移到同一行的上一个c字符处</li>
+<li>tc: 把光标移到同一行的下一个c字符前</li>
+<li>Tc: 把光标移到同一行的上一个c字符后</li>
+<li>;: 配合f &amp; t使用，重复一次</li>
+<li>,: 配合f &amp; t使用，反向重复一次</li>
+</ul>
+<p>上面的操作都可以配合n使用，比如在正常模式(下面会讲到)下输入3h， 则光标向左移动3个字符。</p>
+<ul>
+<li>
+<p>0: 移动到行首。</p>
+</li>
+<li>
+<p>g0: 移到光标所在屏幕行行首。</p>
+</li>
+<li>^: 移动到本行第一个非空白字符。</li>
+<li>
+<p>g^: 同 ^ ，但是移动到当前屏幕行第一个非空字符处。</p>
+</li>
+<li>
+<p>$: 移动到行尾。</p>
+</li>
+<li>g$: 移动光标所在屏幕行行尾。</li>
+<li>n|: 把光标移到递n列上。</li>
+<li>nG: 到文件第n行。</li>
+<li>:n 移动到第n行。</li>
+<li>:$ 移动到最后一行。</li>
+<li>H: 把光标移到屏幕最顶端一行。</li>
+<li>M: 把光标移到屏幕中间一行。</li>
+<li>L: 把光标移到屏幕最底端一行。</li>
+<li>gg: 到文件头部。</li>
+<li>G: 到文件尾部。</li>
+</ul>
+<h3 id="42-翻屏">4.2 翻屏<a class="headerlink" href="#42-翻屏" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ctrl+f: 下翻一屏。</li>
+<li>ctrl+b: 上翻一屏。</li>
+<li>ctrl+d: 下翻半屏。</li>
+<li>ctrl+u: 上翻半屏。</li>
+<li>ctrl+e: 向下滚动一行。</li>
+<li>ctrl+y: 向上滚动一行。</li>
+<li>n%: 到文件n%的位置。</li>
+<li>zz: 将当前行移动到屏幕中央。</li>
+<li>zt: 将当前行移动到屏幕顶端。</li>
+<li>zb: 将当前行移动到屏幕底端。</li>
+</ul>
+<h3 id="43-标记">4.3 标记<a class="headerlink" href="#43-标记" title="Permanent link">&para;</a></h3>
+<p>使用标记可以快速移动。到达标记后，可以用Ctrl+o返回原来的位置。 Ctrl+o和Ctrl+i 很像浏览器上的 后退 和 前进 。</p>
+<ul>
+<li>m{a-z}: 标记光标所在位置，局部标记，只用于当前文件。</li>
+<li>m{A-Z}: 标记光标所在位置，全局标记。标记之后，退出Vim， 重新启动，标记仍然有效。</li>
+<li>`{a-z}: 移动到标记位置。</li>
+<li>'{a-z}: 移动到标记行的行首。</li>
+<li>`{0-9}：回到上[2-10]次关闭vim时最后离开的位置。</li>
+<li><code>: 移动到上次编辑的位置。''也可以，不过</code>精确到列，而''精确到行 。如果想跳转到更老的位置，可以按C-o，跳转到更新的位置用C-i。</li>
+<li>`": 移动到上次离开的地方。</li>
+<li>`.: 移动到最后改动的地方。</li>
+<li>:marks 显示所有标记。</li>
+<li>:delmarks a b -- 删除标记a和b。</li>
+<li>:delmarks a-c -- 删除标记a、b和c。</li>
+<li>:delmarks a c-f -- 删除标记a、c、d、e、f。</li>
+<li>:delmarks! -- 删除当前缓冲区的所有标记。</li>
+<li>:help mark-motions 查看更多关于mark的知识。</li>
+</ul>
+<h2 id="5插入文本">5.插入文本<a class="headerlink" href="#5插入文本" title="Permanent link">&para;</a></h2>
+<h3 id="51-基本插入">5.1 基本插入<a class="headerlink" href="#51-基本插入" title="Permanent link">&para;</a></h3>
+<ul>
+<li>i: 在光标前插入；一个小技巧：按8，再按i，进入插入模式，输入=， 按esc进入命令模式，就会出现8个=。 这在插入分割线时非常有用，如30i+就插入了36个+组成的分割线。</li>
+<li>I: 在当前行第一个非空字符前插入；</li>
+<li>gI: 在当前行第一列插入；</li>
+<li>a: 在光标后插入；</li>
+<li>A: 在当前行最后插入；</li>
+<li>o: 在下面新建一行插入；</li>
+<li>O: 在上面新建一行插入；</li>
+<li>:r filename在当前位置插入另一个文件的内容。</li>
+<li>:[n]r filename在第n行插入另一个文件的内容。</li>
+<li>:r !date 在光标处插入当前日期与时间。同理，:r !command可以将其它shell命令的输出插入当前文档。</li>
+</ul>
+<h3 id="52-改写插入">5.2 改写插入<a class="headerlink" href="#52-改写插入" title="Permanent link">&para;</a></h3>
+<ul>
+<li>c[n]w: 改写光标后1(n)个词。</li>
+<li>c[n]l: 改写光标后n个字母。</li>
+<li>c[n]h: 改写光标前n个字母。</li>
+<li>[n]cc: 修改当前[n]行。</li>
+<li>[n]s: 以输入的文本替代光标之后1(n)个字符，相当于c[n]l。</li>
+<li>[n]S: 删除指定数目的行，并以所输入文本代替之。</li>
+</ul>
+<p>注意，类似cnw,dnw,ynw的形式同样可以写为ncw,ndw,nyw。</p>
+<h2 id="6剪切复制和寄存器">6.剪切复制和寄存器<a class="headerlink" href="#6剪切复制和寄存器" title="Permanent link">&para;</a></h2>
+<h3 id="61-剪切和复制粘贴">6.1 剪切和复制、粘贴<a class="headerlink" href="#61-剪切和复制粘贴" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[n]x: 剪切光标右边n个字符，相当于d[n]l。</li>
+<li>[n]X: 剪切光标左边n个字符，相当于d[n]h。</li>
+<li>y: 复制在可视模式下选中的文本。</li>
+<li>yy or Y: 复制整行文本。</li>
+<li>y[n]w: 复制一(n)个词。</li>
+<li>y[n]l: 复制光标右边1(n)个字符。</li>
+<li>y[n]h: 复制光标左边1(n)个字符。</li>
+<li>y$: 从光标当前位置复制到行尾。</li>
+<li>y0: 从光标当前位置复制到行首。</li>
+<li>:m,ny 复制m行到n行的内容。</li>
+<li>y1G或ygg: 复制光标以上的所有行。</li>
+<li>yG: 复制光标以下的所有行。</li>
+<li>yaw和yas：复制一个词和复制一个句子，即使光标不在词首和句首也没关系。</li>
+<li>d: 删除（剪切）在可视模式下选中的文本。</li>
+<li>d$ or D: 删除（剪切）当前位置到行尾的内容。</li>
+<li>d[n]w: 删除（剪切）1(n)个单词</li>
+<li>d[n]l: 删除（剪切）光标右边1(n)个字符。</li>
+<li>d[n]h: 删除（剪切）光标左边1(n)个字符。</li>
+<li>d0: 删除（剪切）当前位置到行首的内容</li>
+<li>[n] dd: 删除（剪切）1(n)行。</li>
+<li>:m,nd 剪切m行到n行的内容。</li>
+<li>d1G或dgg: 剪切光标以上的所有行。</li>
+<li>dG: 剪切光标以下的所有行。</li>
+<li>daw和das：剪切一个词和剪切一个句子，即使光标不在词首和句首也没关系。</li>
+<li>d/f：这是一个比较高级的组合命令，它将删除当前位置 到下一个f之间的内容。</li>
+<li>p: 在光标之后粘贴。</li>
+<li>P: 在光标之前粘贴。</li>
+</ul>
+<h3 id="62-文本对象">6.2 文本对象<a class="headerlink" href="#62-文本对象" title="Permanent link">&para;</a></h3>
+<ul>
+<li>aw：一个词</li>
+<li>as：一句。</li>
+<li>ap：一段。</li>
+<li>ab：一块（包含在圆括号中的）。</li>
+</ul>
+<p>y, d, c, v都可以跟文本对象。</p>
+<h3 id="63-寄存器">6.3 寄存器<a class="headerlink" href="#63-寄存器" title="Permanent link">&para;</a></h3>
+<ul>
+<li>a-z：都可以用作寄存器名。"ayy把当前行的内容放入a寄存器。</li>
+<li>A-Z：用大写字母索引寄存器，可以在寄存器中追加内容。 如"Ayy把当前行的内容追加到a寄存器中。</li>
+<li>:reg 显示所有寄存器的内容。</li>
+<li>""：不加寄存器索引时，默认使用的寄存器。</li>
+<li>"<em>：当前选择缓冲区，"</em>yy把当前行的内容放入当前选择缓冲区。</li>
+<li>"+：系统剪贴板。"+yy把当前行的内容放入系统剪贴板。</li>
+</ul>
+<h2 id="7查找与替换">7.查找与替换<a class="headerlink" href="#7查找与替换" title="Permanent link">&para;</a></h2>
+<h3 id="71-查找">7.1 查找<a class="headerlink" href="#71-查找" title="Permanent link">&para;</a></h3>
+<ul>
+<li>something: 在后面的文本中查找something。</li>
+<li>?something: 在前面的文本中查找something。</li>
+<li>/pattern/+number: 将光标停在包含pattern的行后面第number行上。</li>
+<li>/pattern/-number: 将光标停在包含pattern的行前面第number行上。</li>
+<li>n: 向后查找下一个。</li>
+<li>N: 向前查找下一个。</li>
+</ul>
+<p>可以用grep或vimgrep查找一个模式都在哪些地方出现过，</p>
+<p>其中:grep是调用外部的grep程序，而:vimgrep是vim自己的查找算法。</p>
+<p>用法为： :vim[grep]/pattern/[g] [j] files</p>
+<p>g的含义是如果一个模式在一行中多次出现，则这一行也在结果中多次出现。</p>
+<p>j的含义是grep结束后，结果停在第j项，默认是停在第一项。</p>
+<p>vimgrep前面可以加数字限定搜索结果的上限，如</p>
+<p>:1vim/pattern/ % 只查找那个模式在本文件中的第一个出现。</p>
+<p>其实vimgrep在读纯文本电子书时特别有用，可以生成导航的目录。</p>
+<p>比如电子书中每一节的标题形式为：n. xxxx。你就可以这样：</p>
+<p>:vim/^d{1,}./ %</p>
+<p>然后用:cw或:copen查看结果，可以用C-w H把quickfix窗口移到左侧，</p>
+<p>就更像个目录了。</p>
+<h3 id="72-替换">7.2 替换<a class="headerlink" href="#72-替换" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:s/old/new - 用new替换当前行第一个old。</li>
+<li>:s/old/new/g - 用new替换当前行所有的old。</li>
+<li>:n1,n2s/old/new/g - 用new替换文件n1行到n2行所有的old。</li>
+<li>:%s/old/new/g - 用new替换文件中所有的old。</li>
+<li>:%s/^/xxx/g - 在每一行的行首插入xxx，^表示行首。</li>
+<li>:%s/<span class="arithmatex">\(/xxx/g - 在每一行的行尾插入xxx，\)</span>表示行尾。</li>
+<li>所有替换命令末尾加上c，每个替换都将需要用户确认。 如：%s/old/new/gc，加上i则忽略大小写(ignore)。</li>
+</ul>
+<p>还有一种比替换更灵活的方式，它是匹配到某个模式后执行某种命令，</p>
+<p>语法为 :[range]g/pattern/command</p>
+<p>例如 :%g/^ xyz/normal dd。</p>
+<p>表示对于以一个空格和xyz开头的行执行normal模式下的dd命令。</p>
+<p>关于range的规定为：</p>
+<ul>
+<li>如果不指定range，则表示当前行。</li>
+<li>m,n: 从m行到n行。</li>
+<li>0: 最开始一行（可能是这样）。</li>
+<li>$: 最后一行</li>
+<li>.: 当前行</li>
+<li>%: 所有行</li>
+</ul>
+<h3 id="73-正则表达式">7.3 正则表达式<a class="headerlink" href="#73-正则表达式" title="Permanent link">&para;</a></h3>
+<p>高级的查找替换就要用到正则表达式。</p>
+<ul>
+<li>d: 表示十进制数（我猜的）</li>
+<li>s: 表示空格</li>
+<li>S: 非空字符</li>
+<li>a: 英文字母</li>
+<li>|: 表示 或</li>
+<li>.: 表示.</li>
+<li>{m,n}: 表示m到n个字符。这要和 s与a等连用，如 a{m,n} 表示m 到n个英文字母。</li>
+<li>{m,}: 表示m到无限多个字符。</li>
+<li>**: 当前目录下的所有子目录。</li>
+</ul>
+<p>:help pattern得到更多帮助。</p>
+<h2 id="8排版">8.排版<a class="headerlink" href="#8排版" title="Permanent link">&para;</a></h2>
+<h3 id="81-基本排版">8.1 基本排版<a class="headerlink" href="#81-基本排版" title="Permanent link">&para;</a></h3>
+<ul>
+<li>&lt;&lt; 向左缩进一个shiftwidth</li>
+<li>&gt;&gt; 向右缩进一个shiftwidth</li>
+<li>:ce(nter) 本行文字居中</li>
+<li>:le(ft) 本行文字靠左</li>
+<li>:ri(ght) 本行文字靠右</li>
+<li>gq 对选中的文字重排，即对过长的文字进行断行</li>
+<li>gqq 重排当前行</li>
+<li>gqnq 重排n行</li>
+<li>gqap 重排当前段</li>
+<li>gqnap 重排n段</li>
+<li>gqnj 重排当前行和下面n行</li>
+<li>gqQ 重排当前段对文章末尾</li>
+<li>J 拼接当前行和下一行</li>
+<li>gJ 同 J ，不过合并后不留空格。</li>
+</ul>
+<h3 id="82-拼写检查">8.2 拼写检查<a class="headerlink" href="#82-拼写检查" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:set spell－开启拼写检查功能</li>
+<li>:set nospell－关闭拼写检查功能</li>
+<li>]s－移到下一个拼写错误的单词</li>
+<li>[s－作用与上一命令类似，但它是从相反方向进行搜索</li>
+<li>z=－显示一个有关拼写错误单词的列表，可从中选择</li>
+<li>zg－告诉拼写检查器该单词是拼写正确的</li>
+<li>zw－与上一命令相反，告诉拼写检查器该单词是拼写错误的</li>
+</ul>
+<h3 id="83-统计字数">8.3 统计字数<a class="headerlink" href="#83-统计字数" title="Permanent link">&para;</a></h3>
+<p>g ^g可以统计文档字符数，行数。 将光标放在最后一个字符上，用字符数减去行数可以粗略统计中文文档的字数。 以上对 Mac 或 Unix 的文件格式适用。 如果是 Windows 文件格式（即换行符有两个字节），字数的统计方法为： 字符数 - 行数 * 2。</p>
+<h2 id="9编辑多个文件">9.编辑多个文件<a class="headerlink" href="#9编辑多个文件" title="Permanent link">&para;</a></h2>
+<h3 id="91-一次编辑多个文件">9.1 一次编辑多个文件<a class="headerlink" href="#91-一次编辑多个文件" title="Permanent link">&para;</a></h3>
+<p>我们可以一次打开多个文件，如</p>
+<p>vi a.txt b.txt c.txt</p>
+<ul>
+<li>使用:next(:n)编辑下一个文件。</li>
+<li>:2n 编辑下2个文件。</li>
+<li>使用:previous或:N编辑上一个文件。</li>
+<li>使用:wnext，保存当前文件，并编辑下一个文件。</li>
+<li>使用:wprevious，保存当前文件，并编辑上一个文件。</li>
+<li>使用:args 显示文件列表。</li>
+<li>:n filenames或:args filenames 指定新的文件列表。</li>
+<li>vi -o filenames 在水平分割的多个窗口中编辑多个文件。</li>
+<li>vi -O filenames 在垂直分割的多个窗口中编辑多个文件。</li>
+</ul>
+<h3 id="92-多标签编辑">9.2 多标签编辑<a class="headerlink" href="#92-多标签编辑" title="Permanent link">&para;</a></h3>
+<ul>
+<li>vim -p files: 打开多个文件，每个文件占用一个标签页。</li>
+<li>:tabe, tabnew -- 如果加文件名，就在新的标签中打开这个文件， 否则打开一个空缓冲区。</li>
+<li>^w gf -- 在新的标签页里打开光标下路径指定的文件。</li>
+<li>:tabn -- 切换到下一个标签。Control + PageDown，也可以。</li>
+<li>:tabp -- 切换到上一个标签。Control + PageUp，也可以。</li>
+<li>[n] gt -- 切换到下一个标签。如果前面加了 </li>
+</ul>
+<p>n ， 就切换到第n个标签。第一个标签的序号就是1。</p>
+<ul>
+<li>:tab split -- 将当前缓冲区的内容在新页签中打开。</li>
+<li>:tabc[lose] -- 关闭当前的标签页。</li>
+<li>:tabo[nly] -- 关闭其它的标签页。</li>
+<li>:tabs -- 列出所有的标签页和它们包含的窗口。</li>
+<li>:tabm[ove] [N] -- 移动标签页，移动到第N个标签页之后。 如 </li>
+</ul>
+<p>tabm 0 当前标签页，就会变成第一个标签页。</p>
+<h3 id="93-缓冲区">9.3 缓冲区<a class="headerlink" href="#93-缓冲区" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:buffers或:ls或:files 显示缓冲区列表。</li>
+<li>ctrl+^：在最近两个缓冲区间切换。</li>
+<li>:bn -- 下一个缓冲区。</li>
+<li>:bp -- 上一个缓冲区。</li>
+<li>:bl -- 最后一个缓冲区。</li>
+<li>:b[n]或:[n]b -- 切换到第n个缓冲区。</li>
+<li>:nbw(ipeout) -- 彻底删除第n个缓冲区。</li>
+<li>:nbd(elete) -- 删除第n个缓冲区，并未真正删除，还在unlisted列表中。</li>
+<li>:ba[ll] -- 把所有的缓冲区在当前页中打开，每个缓冲区占一个窗口。</li>
+</ul>
+<h2 id="10分屏编辑">10.分屏编辑<a class="headerlink" href="#10分屏编辑" title="Permanent link">&para;</a></h2>
+<ul>
+<li>vim -o file1 file2:水平分割窗口，同时打开file1和file2</li>
+<li>vim -O file1 file2:垂直分割窗口，同时打开file1和file2</li>
+</ul>
+<h3 id="101-水平分割">10.1 水平分割<a class="headerlink" href="#101-水平分割" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:split(:sp) -- 把当前窗水平分割成两个窗口。(CTRL-W s 或 CTRL-W CTRL-S) 注意如果在终端下，CTRL-S可能会冻结终端，请按CTRL-Q继续。</li>
+<li>:split filename -- 水平分割窗口，并在新窗口中显示另一个文件。</li>
+<li>:nsplit(:nsp) -- 水平分割出一个n行高的窗口。</li>
+<li>:[N]new -- 水平分割出一个N行高的窗口，并编辑一个新文件。 (CTRL-W n或 CTRL-W CTRL-N)</li>
+<li>ctrl+w f --水平分割出一个窗口，并在新窗口打开名称为光标所在词的文件 。</li>
+<li>C-w C-^ -- 水平分割一个窗口，打开刚才编辑的文件。</li>
+</ul>
+<h3 id="102-垂直分割">10.2 垂直分割<a class="headerlink" href="#102-垂直分割" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:vsplit(:vsp) -- 把当前窗口分割成水平分布的两个窗口。 (CTRL-W v或CTRL CTRL-V)</li>
+<li>:[N]vne[w] -- 垂直分割出一个新窗口。</li>
+<li>:vertical 水平分割的命令： 相应的垂直分割。</li>
+</ul>
+<h3 id="103-关闭子窗口">10.3 关闭子窗口<a class="headerlink" href="#103-关闭子窗口" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:qall -- 关闭所有窗口，退出vim。</li>
+<li>:wall -- 保存所有修改过的窗口。</li>
+<li>:only -- 只保留当前窗口，关闭其它窗口。(CTRL-W o)</li>
+<li>:close -- 关闭当前窗口，CTRL-W c能实现同样的功能。 (象 :q :x同样工作 )</li>
+</ul>
+<h3 id="104-调整窗口大小">10.4 调整窗口大小<a class="headerlink" href="#104-调整窗口大小" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ctrl+w + --当前窗口增高一行。也可以用n增高n行。</li>
+<li>ctrl+w - --当前窗口减小一行。也可以用n减小n行。</li>
+<li>ctrl+w _ --当前窗口扩展到尽可能的大。也可以用n设定行数。</li>
+<li>:resize n -- 当前窗口n行高。</li>
+<li>ctrl+w = -- 所有窗口同样高度。</li>
+<li>n ctrl+w _ -- 当前窗口的高度设定为n行。</li>
+<li>ctrl+w &lt; --当前窗口减少一列。也可以用n减少n列。</li>
+<li>ctrl+w &gt; --当前窗口增宽一列。也可以用n增宽n列。</li>
+<li>ctrl+w | --当前窗口尽可能的宽。也可以用n设定列数。</li>
+</ul>
+<h3 id="105-切换和移动窗口">10.5 切换和移动窗口<a class="headerlink" href="#105-切换和移动窗口" title="Permanent link">&para;</a></h3>
+<p>如果支持鼠标，切换和调整子窗口的大小就简单了。</p>
+<ul>
+<li>ctrl+w ctrl+w: 切换到下一个窗口。或者是ctrl+w w。</li>
+<li>ctrl+w p: 切换到前一个窗口。</li>
+<li>ctrl+w h(l,j,k):切换到左（右，下，上）的窗口。</li>
+<li>ctrl+w t(b):切换到最上（下）面的窗口。</li>
+<li>ctrl+w H(L,K,J): 将当前窗口移动到最左（右、上、下）面。</li>
+<li>ctrl+w r：旋转窗口的位置。</li>
+<li>ctrl+w T: 将当前的窗口移动到新的标签页上。</li>
+</ul>
+<h2 id="11快速编辑">11.快速编辑<a class="headerlink" href="#11快速编辑" title="Permanent link">&para;</a></h2>
+<h3 id="111-改变大小写">11.1 改变大小写<a class="headerlink" href="#111-改变大小写" title="Permanent link">&para;</a></h3>
+<ul>
+<li>~: 反转光标所在字符的大小写。</li>
+<li>可视模式下的U或u：把选中的文本变为大写或小写。</li>
+<li>gu(U)接范围（如$，或G），可以把从光标当前位置到指定位置之间字母全部 转换成小写或大写。如ggguG，就是把开头到最后一行之间的字母全部变为小 写。再如gu5j，把当前行和下面四行全部变成小写。</li>
+</ul>
+<h3 id="112-替换normal模式">11.2 替换（normal模式）<a class="headerlink" href="#112-替换normal模式" title="Permanent link">&para;</a></h3>
+<ul>
+<li>r: 替换光标处的字符，同样支持汉字。</li>
+<li>R: 进入替换模式，按esc回到正常模式。</li>
+</ul>
+<h3 id="113-撤消与重做normal模式">11.3 撤消与重做（normal模式）<a class="headerlink" href="#113-撤消与重做normal模式" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[n] u: 取消一(n)个改动。</li>
+<li>:undo 5 -- 撤销5个改变。</li>
+<li>:undolist -- 你的撤销历史。</li>
+<li>ctrl + r: 重做最后的改动。</li>
+<li>U: 取消当前行中所有的改动。</li>
+<li>:earlier 4m -- 回到4分钟前</li>
+<li>:later 55s -- 前进55秒</li>
+</ul>
+<h3 id="114-宏---重复上一个编辑动作">11.4 宏. --重复上一个编辑动作<a class="headerlink" href="#114-宏---重复上一个编辑动作" title="Permanent link">&para;</a></h3>
+<ul>
+<li>qa：开始录制宏a（键盘操作记录）</li>
+<li>q：停止录制</li>
+<li>@a：播放宏a</li>
+</ul>
+<h2 id="12编辑特殊文件">12.编辑特殊文件<a class="headerlink" href="#12编辑特殊文件" title="Permanent link">&para;</a></h2>
+<h3 id="121-文件加解密">12.1 文件加解密<a class="headerlink" href="#121-文件加解密" title="Permanent link">&para;</a></h3>
+<ul>
+<li>vim -x file: 开始编辑一个加密的文件。</li>
+<li>:X -- 为当前文件设置密码。</li>
+<li>:set key= -- 去除文件的密码。</li>
+</ul>
+<h3 id="122-文件的编码">12.2 文件的编码<a class="headerlink" href="#122-文件的编码" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:e ++enc=utf8 filename, 让vim用utf-8的编码打开这个文件。</li>
+<li>:w ++enc=gbk，不管当前文件什么编码，把它转存成gbk编码。</li>
+<li>:set fenc或:set fileencoding，查看当前文件的编码。</li>
+<li>在vimrc中添加set fileencoding=ucs-bom,utf-8,cp936，vim会根据要打开的文件选择合适的编码。 注意：编码之间不要留空格。 cp936对应于gbk编码。 ucs-bom对应于windows下的文件格式。</li>
+</ul>
+<p>让vim 正确处理文件格式和文件编码，有赖于 <a href="http://www.cnblogs.com/jiqingwu/admin/vimrc.html">~/.vimrc的正确配置</a>。</p>
+<h3 id="123-文件格式">12.3 文件格式<a class="headerlink" href="#123-文件格式" title="Permanent link">&para;</a></h3>
+<p>大致有三种文件格式：unix, dos, mac. 三种格式的区别主要在于回车键的编码：dos 下是回车加换行，unix 下只有 换行符，mac 下只有回车符。</p>
+<ul>
+<li>:e ++ff=dos filename, 让vim用dos格式打开这个文件。</li>
+<li>:w ++ff=mac filename, 以mac格式存储这个文件。</li>
+<li>:set ff，显示当前文件的格式。</li>
+<li>在vimrc中添加set fileformats=unix,dos,mac，让vim自动识别文件格式。</li>
+</ul>
+<h2 id="13编程辅助">13.编程辅助<a class="headerlink" href="#13编程辅助" title="Permanent link">&para;</a></h2>
+<h3 id="131-一些按键">13.1 一些按键<a class="headerlink" href="#131-一些按键" title="Permanent link">&para;</a></h3>
+<ul>
+<li>gd: 跳转到局部变量的定义处；</li>
+<li>gD: 跳转到全局变量的定义处，从当前文件开头开始搜索；</li>
+<li>g;: 上一个修改过的地方；</li>
+<li>g,: 下一个修改过的地方；</li>
+<li>[[: 跳转到上一个函数块开始，需要有单独一行的{。</li>
+<li>]]: 跳转到下一个函数块开始，需要有单独一行的{。</li>
+<li>[] : 跳转到上一个函数块结束，需要有单独一行的}。</li>
+<li>][: 跳转到下一个函数块结束，需要有单独一行的}。</li>
+<li>[{: 跳转到当前块开始处；</li>
+<li>]}: 跳转到当前块结束处；</li>
+<li>[/: 跳转到当前注释块开始处；</li>
+<li>]/: 跳转到当前注释块结束处；</li>
+<li>%: 不仅能移动到匹配的(),{}或[]上，而且能在#if，#else， #endif之间跳跃。</li>
+</ul>
+<p>下面的括号匹配对编程很实用的。</p>
+<ul>
+<li>ci', di', yi'：修改、剪切或复制'之间的内容。</li>
+<li>ca', da', ya'：修改、剪切或复制'之间的内容，包含'。</li>
+<li>ci", di", yi"：修改、剪切或复制"之间的内容。</li>
+<li>ca", da", ya"：修改、剪切或复制"之间的内容，包含"。</li>
+<li>ci(, di(, yi(：修改、剪切或复制()之间的内容。</li>
+<li>ca(, da(, ya(：修改、剪切或复制()之间的内容，包含()。</li>
+<li>ci[, di[, yi[：修改、剪切或复制[]之间的内容。</li>
+<li>ca[, da[, ya[：修改、剪切或复制[]之间的内容，包含[]。</li>
+<li>ci{, di{, yi{：修改、剪切或复制{}之间的内容。</li>
+<li>ca{, da{, ya{：修改、剪切或复制{}之间的内容，包含{}。</li>
+<li>ci&lt;, di&lt;, yi&lt;：修改、剪切或复制&lt;&gt;之间的内容。</li>
+<li>ca&lt;, da&lt;, ya&lt;：修改、剪切或复制&lt;&gt;之间的内容，包含&lt;&gt;。</li>
+</ul>
+<h3 id="132-ctags">13.2 ctags<a class="headerlink" href="#132-ctags" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ctags -R: 生成tag文件，-R表示也为子目录中的文件生成tags</li>
+<li>:set tags=path/tags -- 告诉ctags使用哪个tag文件</li>
+<li>:tag xyz -- 跳到xyz的定义处，或者将光标放在xyz上按C-]，返回用C-t</li>
+<li>:stag xyz -- 用分割的窗口显示xyz的定义，或者C-w ]， 如果用C-w n ]，就会打开一个n行高的窗口</li>
+<li>:ptag xyz -- 在预览窗口中打开xyz的定义，热键是C-w }。</li>
+<li>:pclose -- 关闭预览窗口。热键是C-w z。</li>
+<li>:pedit abc.h -- 在预览窗口中编辑abc.h</li>
+<li>:psearch abc -- 搜索当前文件和当前文件include的文件，显示包含abc的行。</li>
+</ul>
+<p>有时一个tag可能有多个匹配，如函数重载，一个函数名就会有多个匹配。 这种情况会先跳转到第一个匹配处。</p>
+<ul>
+<li>:[n]tnext -- 下一[n]个匹配。</li>
+<li>:[n]tprev -- 上一[n]个匹配。</li>
+<li>:tfirst -- 第一个匹配</li>
+<li>:tlast -- 最后一个匹配</li>
+<li>:tselect tagname -- 打开选择列表</li>
+</ul>
+<p>tab键补齐</p>
+<ul>
+<li>:tag xyz -- 补齐以xyz开头的tag名，继续按tab键，会显示其他的。</li>
+<li>:tag /xyz -- 会用名字中含有xyz的tag名补全。</li>
+</ul>
+<h3 id="133-cscope">13.3 cscope<a class="headerlink" href="#133-cscope" title="Permanent link">&para;</a></h3>
+<ul>
+<li>cscope -Rbq: 生成cscope.out文件</li>
+<li>:cs add /path/to/cscope.out /your/work/dir</li>
+<li>:cs find c func -- 查找func在哪些地方被调用</li>
+<li>:cw -- 打开quickfix窗口查看结果</li>
+</ul>
+<h3 id="134-gtags">13.4 gtags<a class="headerlink" href="#134-gtags" title="Permanent link">&para;</a></h3>
+<p>Gtags综合了ctags和cscope的功能。 使用Gtags之前，你需要安装GNU Gtags。 然后在工程目录运行 gtags 。</p>
+<ul>
+<li>:Gtags funcname 定位到 funcname 的定义处。</li>
+<li>:Gtags -r funcname 查询 funcname被引用的地方。</li>
+<li>:Gtags -s symbol 定位 symbol 出现的地方。</li>
+<li>:Gtags -g string Goto string 出现的地方。 :Gtags -gi string 忽略大小写。</li>
+<li>:Gtags -f filename 显示 filename 中的函数列表。 你可以用 :Gtags -f % 显示当前文件。</li>
+<li>:Gtags -P pattern 显示路径中包含特定模式的文件。 如 :Gtags -P .h$ 显示所有头文件， :Gtags -P /vm/ 显示vm目录下的文件。</li>
+</ul>
+<h3 id="135-编译">13.5 编译<a class="headerlink" href="#135-编译" title="Permanent link">&para;</a></h3>
+<p>vim提供了:make来编译程序，默认调用的是make， 如果你当前目录下有makefile，简单地:make即可。</p>
+<p>如果你没有make程序，你可以通过配置makeprg选项来更改make调用的程序。 如果你只有一个abc.java文件，你可以这样设置：</p>
+<p>set makeprg=javac abc.java</p>
+<p>然后:make即可。如果程序有错，可以通过quickfix窗口查看错误。 不过如果要正确定位错误，需要设置好errorformat，让vim识别错误信息。 如：</p>
+<p>:setl efm=%A%f:%l: %m,%-Z%p^,%-C%.%#</p>
+<p>%f表示文件名，%l表示行号， %m表示错误信息，其它的还不能理解。 请参考 :help errorformat。</p>
+<h3 id="136-快速修改窗口">13.6 快速修改窗口<a class="headerlink" href="#136-快速修改窗口" title="Permanent link">&para;</a></h3>
+<p>其实是quickfix插件提供的功能， 对编译调试程序非常有用 :)</p>
+<ul>
+<li>:copen -- 打开快速修改窗口。</li>
+<li>:cclose -- 关闭快速修改窗口。</li>
+</ul>
+<p>快速修改窗口在make程序时非常有用，当make之后：</p>
+<ul>
+<li>:cl -- 在快速修改窗口中列出错误。</li>
+<li>:cn -- 定位到下一个错误。</li>
+<li>:cp -- 定位到上一个错误。</li>
+<li>:cr -- 定位到第一个错误。</li>
+</ul>
+<h3 id="137-自动补全">13.7 自动补全<a class="headerlink" href="#137-自动补全" title="Permanent link">&para;</a></h3>
+<ul>
+<li>C-x C-s -- 拼写建议。</li>
+<li>C-x C-v -- 补全vim选项和命令。</li>
+<li>C-x C-l -- 整行补全。</li>
+<li>C-x C-f -- 自动补全文件路径。弹出菜单后，按C-f循环选择，当然也可以按 C-n和C-p。</li>
+<li>C-x C-p 和C-x C-n -- 用文档中出现过的单词补全当前的词。 直接按C-p和C-n也可以。</li>
+<li>C-x C-o -- 编程时可以补全关键字和函数名啊。</li>
+<li>C-x C-i -- 根据头文件内关键字补全。</li>
+<li>C-x C-d -- 补全宏定义。</li>
+<li>C-x C-n -- 按缓冲区中出现过的关键字补全。 直接按C-n或C-p即可。</li>
+</ul>
+<p>当弹出补全菜单后：</p>
+<ul>
+<li>C-p 向前切换成员；</li>
+<li>C-n 向后切换成员；</li>
+<li>C-e 退出下拉菜单，并退回到原来录入的文字；</li>
+<li>C-y 退出下拉菜单，并接受当前选项。</li>
+</ul>
+<h3 id="138-多行缩进缩出">13.8 多行缩进缩出<a class="headerlink" href="#138-多行缩进缩出" title="Permanent link">&para;</a></h3>
+<ul>
+<li>正常模式下，按两下&gt;;光标所在行会缩进。</li>
+<li>如果先按了n，再按两下&gt;;，光标以下的n行会缩进。</li>
+<li>对应的，按两下&lt;;，光标所在行会缩出。</li>
+<li>如果在编辑代码文件，可以用=进行调整。</li>
+<li>在可视模式下，选择要调整的代码块，按=，代码会按书写规则缩排好。</li>
+<li>或者n =，调整n行代码的缩排。</li>
+</ul>
+<h3 id="139-折叠">13.9 折叠<a class="headerlink" href="#139-折叠" title="Permanent link">&para;</a></h3>
+<ul>
+<li>zf -- 创建折叠的命令，可以在一个可视区域上使用该命令；</li>
+<li>zd -- 删除当前行的折叠；</li>
+<li>zD -- 删除当前行的折叠；</li>
+<li>zfap -- 折叠光标所在的段；</li>
+<li>zo -- 打开折叠的文本；</li>
+<li>zc -- 收起折叠；</li>
+<li>za -- 打开/关闭当前折叠；</li>
+<li>zr -- 打开嵌套的折行；</li>
+<li>zm -- 收起嵌套的折行；</li>
+<li>zR (zO) -- 打开所有折行；</li>
+<li>zM (zC) -- 收起所有折行；</li>
+<li>zj -- 跳到下一个折叠处；</li>
+<li>zk -- 跳到上一个折叠处；</li>
+<li>zi -- enable/disable fold;</li>
+</ul>
+<h2 id="14命令行">14.命令行<a class="headerlink" href="#14命令行" title="Permanent link">&para;</a></h2>
+<p>normal模式下按:进入命令行模式</p>
+<h3 id="141-命令行模式下的快捷键">14.1 命令行模式下的快捷键<a class="headerlink" href="#141-命令行模式下的快捷键" title="Permanent link">&para;</a></h3>
+<ul>
+<li>上下方向键：上一条或者下一条命令。如果已经输入了部分命令，则找上一 条或者下一条匹配的命令。</li>
+<li>左右方向键：左/右移一个字符。</li>
+<li>C-w： 向前删除一个单词。</li>
+<li>C-h： 向前删除一个字符，等同于Backspace。</li>
+<li>C-u： 从当前位置移动到命令行开头。</li>
+<li>C-b： 移动到命令行开头。</li>
+<li>C-e： 移动到命令行末尾。</li>
+<li>Shift-Left： 左移一个单词。</li>
+<li>Shift-Right： 右移一个单词。</li>
+<li>@： 重复上一次的冒号命令。</li>
+<li>q： 正常模式下，q然后按':'，打开命令行历史缓冲区， 可以像编辑文件一样编辑命令。</li>
+<li>q/和q? 可以打开查找历史记录。</li>
+</ul>
+<h3 id="142-执行外部命令">14.2 执行外部命令<a class="headerlink" href="#142-执行外部命令" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:! cmd 执行外部命令。</li>
+<li>:!! 执行上一次的外部命令。</li>
+<li>:sh 调用shell，用exit返回vim。</li>
+<li>:r !cmd 将命令的返回结果插入文件当前位置。</li>
+<li>:m,nw !cmd 将文件的m行到n行之间的内容做为命令输入执行命令。</li>
+</ul>
+<h2 id="15其它">15.其它<a class="headerlink" href="#15其它" title="Permanent link">&para;</a></h2>
+<h3 id="151-工作目录">15.1 工作目录<a class="headerlink" href="#151-工作目录" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:pwd 显示vim的工作目录。</li>
+<li>:cd path 改变vim的工作目录。</li>
+<li>:set autochdir 可以让vim 根据编辑的文件自动切换工作目录。</li>
+</ul>
+<h3 id="152-一些快捷键">15.2 一些快捷键<a class="headerlink" href="#152-一些快捷键" title="Permanent link">&para;</a></h3>
+<ul>
+<li>K: 打开光标所在词的manpage。</li>
+<li>*: 向下搜索光标所在词。</li>
+<li>g*: 同上，但部分符合即可。</li>
+<li>#: 向上搜索光标所在词。</li>
+<li>g#: 同上，但部分符合即可。</li>
+<li>g C-g: 统计全文或统计部分的字数。</li>
+</ul>
+<h3 id="153-在线帮助">15.3 在线帮助<a class="headerlink" href="#153-在线帮助" title="Permanent link">&para;</a></h3>
+<ul>
+<li>:h(elp)或F1 打开总的帮助。</li>
+<li>:help user-manual 打开用户手册。</li>
+<li>命令帮助的格式为：第一行指明怎么使用那个命令； 然后是缩进的一段解释这个命令的作用，然后是进一步的信息。</li>
+<li>:helptags somepath 为somepath中的文档生成索引。</li>
+<li>:helpgrep 可以搜索整个帮助文档，匹配的列表显示在quickfix窗口中。</li>
+<li>Ctrl+] 跳转到tag主题，Ctrl+t 跳回。</li>
+<li>:ver 显示版本信息。</li>
+</ul>
+<h3 id="154-一些小功能">15.4 一些小功能<a class="headerlink" href="#154-一些小功能" title="Permanent link">&para;</a></h3>
+<ul>
+<li>简单计算器: 在插入模式下，输入C-r =，然后输入表达式，就能在 光标处得到计算结果。</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+  data-repo="leoalasiga/myGicus"
+  data-repo-id="R_kgDOL_8gew"
+  data-category="General"
+  data-category-id="DIC_kwDOL_8ge84Cfk89"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="1"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async>
+</script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../../../11/25/jvm%E6%95%85%E9%9A%9C%E5%88%86%E6%9E%90%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E4%BD%BF%E7%94%A8jstack%E5%AE%9A%E4%BD%8D%E7%BA%BF%E7%A8%8B%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF%E8%BD%AC%E8%BD%BD/" class="md-footer__link md-footer__link--prev" aria-label="上一页: JVM故障分析及性能优化系列之一：使用jstack定位线程堆栈信息(转载)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                JVM故障分析及性能优化系列之一：使用jstack定位线程堆栈信息(转载)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../http%E7%8A%B6%E6%80%81%E7%A0%81/" class="md-footer__link md-footer__link--next" aria-label="下一页: HTTP状态码">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                HTTP状态码
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 leoalasiaga
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/leoalasiga" target="_blank" rel="noopener" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://leoalasiga.github.io" target="_blank" rel="noopener me" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.5 102.5 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5m-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.top", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.prune", "navigation.footer", "content.code.annotate", "content.code.copy", "toc.integrate", "toc.follow", "search.suggest", "search.highlight", "search.share", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1710 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Blogs record by Leoalsiga">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/2024/12/01/g1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E8%BD%AC%E8%BD%BD/">
+      
+      
+        <link rel="prev" href="../http%E7%8A%B6%E6%80%81%E7%A0%81/">
+      
+      
+      
+      <link rel="icon" href="../../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>G1垃圾收集器(转载) - Leoalasiga Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Mono";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#g1垃圾收集器转载" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-header__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Leoalasiga Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              G1垃圾收集器(转载)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+    
+  
+  主页
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../tags/" class="md-tabs__link">
+          
+  
+    
+  
+  分类
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../contact/" class="md-tabs__link">
+          
+  
+    
+  
+  联系我
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../link/" class="md-tabs__link">
+          
+  
+    
+  
+  友链
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://leoalasiga.github.io" title="Leoalasiga Blog" class="md-nav__button md-logo" aria-label="Leoalasiga Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 4c-1.71 0-2.75.33-3.35.61C13.88 4.23 13 4 12 4s-1.88.23-2.65.61C8.75 4.33 7.71 4 6 4c-3 0-5 8-5 10 0 .83 1.32 1.59 3.14 1.9.64 2.24 3.66 3.95 7.36 4.1v-4.28c-.59-.37-1.5-1.04-1.5-1.72 0-1 2-1 2-1s2 0 2 1c0 .68-.91 1.35-1.5 1.72V20c3.7-.15 6.72-1.86 7.36-4.1C21.68 15.59 23 14.83 23 14c0-2-2-10-5-10M4.15 13.87c-.5-.12-.89-.26-1.15-.37.25-2.77 2.2-7.1 3.05-7.5.54 0 .95.06 1.32.11-2.1 2.31-2.93 5.93-3.22 7.76M9 12a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m6 0a1 1 0 0 1-1-1c0-.54.45-1 1-1a1 1 0 0 1 1 1c0 .56-.45 1-1 1m4.85 1.87c-.29-1.83-1.12-5.45-3.22-7.76.37-.05.78-.11 1.32-.11.85.4 2.8 4.73 3.05 7.5-.25.11-.64.25-1.15.37"/></svg>
+
+    </a>
+    Leoalasiga Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/leoalasiga/leoalasiga.github.io.git" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    leoalasiga/leoalasiga.github.io.git
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            主页
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    归档
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            归档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../tags/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    分类
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../contact/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    联系我
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../link/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/39647836?s%E2%80%A600&u=ebd5960bd9de24b76570524e4a1a148bd6339b35&v=4" alt="leoalasiga">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          leoalasiga
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-01 00:00:00+00:00" class="md-ellipsis">2024/12/1</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              需要 12 分钟阅读时间
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目的" class="md-nav__link">
+    <span class="md-ellipsis">
+      目的
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-技术-和-jvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 技术 和 JVM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Java 技术 和 JVM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#探索-jvm-体系架构" class="md-nav__link">
+    <span class="md-ellipsis">
+      探索 JVM 体系架构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#性能基础" class="md-nav__link">
+    <span class="md-ellipsis">
+      性能基础
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#g1-垃圾收集器garbage-collector" class="md-nav__link">
+    <span class="md-ellipsis">
+      G1 垃圾收集器(Garbage Collector)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="G1 垃圾收集器(Garbage Collector)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#g1-垃圾收集器" class="md-nav__link">
+    <span class="md-ellipsis">
+      G1 垃圾收集器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cms的gc概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      CMS的GC概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CMS的GC概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#分代gcgenerational-gc与-cms" class="md-nav__link">
+    <span class="md-ellipsis">
+      分代GC(Generational GC)与 CMS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#g1垃圾收集器概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      G1垃圾收集器概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="G1垃圾收集器概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#一步步介绍g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一步步介绍G1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#old-generation-collection-with-g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Old Generation Collection with G1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#命令行参数与最佳实践" class="md-nav__link">
+    <span class="md-ellipsis">
+      命令行参数与最佳实践
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="命令行参数与最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#命令行参数与最佳实践_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      命令行参数与最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#记录g1的gc日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      记录G1的GC日志
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="记录G1的GC日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#记录g1的gc日志_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      记录G1的GC日志
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#总结" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <a href="../../../../tags/#java" class="md-tag">java</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#g1" class="md-tag">g1</a>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="g1垃圾收集器转载">G1垃圾收集器(转载)<a class="headerlink" href="#g1垃圾收集器转载" title="Permanent link">&para;</a></h1>
+<h2 id="说明"><strong>说明</strong><a class="headerlink" href="#说明" title="Permanent link">&para;</a></h2>
+<p>concurrent: 并发, 多个线程协同做同一件事情(有状态)</p>
+<p>parallel: 并行, 多个线程各做各的事情(互相间无共享状态)</p>
+<p><strong>在GC领域</strong>: concurrent算法指GC线程和业务线程能并发执行； parallel指GC线程之间的并行。</p>
+<p>参考: <a href="https://joearms.github.io/published/2013-04-05-concurrent-and-parallel-programming.html">What’s the difference between concurrency and parallelism</a></p>
+<!-- more -->
+
+<h2 id="目的">目的<a class="headerlink" href="#目的" title="Permanent link">&para;</a></h2>
+<p>本文介绍如何使用G1,及在 Hotspot JVM 中怎么使用G1垃圾收集器。 您将了解 G1 收集器的内部原理, 切换为 G1 收集器的命令行参数, 以及让其记录GC日志的选项。</p>
+<h2 id="简介">简介<a class="headerlink" href="#简介" title="Permanent link">&para;</a></h2>
+<p>本文涵盖了Java虚拟机(JVM, Java Virtual Machine)中 G1 的基础知识。</p>
+<p>1、第一部分, 简单概述JVM的同时介绍了垃圾收集和性能.2、接下来讲述了 Hotspot JVM 中 CMS 收集器是如何工作的.3、接着再一步一步地指导在 Hotspot JVM 中使用G1进行垃圾回收的工作方式.4、之后的一个小节介绍 G1 垃圾收集器可用的命令行参数.5、最后,您将了解如何配置使G1收集器记录日志.</p>
+<p>硬件与软件环境需求</p>
+<p>下面是 硬件与软件环境需求 清单:</p>
+<ul>
+<li>一台PC机, 运行 Windows XP 以上操作系统, Mac OS X 或者 Linux 都可以. 注意,因为作者在Windows 7上进行开发和测试, 尚未在所有平台上完成测试。 但在 OS X和Linux 上应该也是正常的。最好配置了多核CPU.</li>
+<li>Java 7 Update 9 或更高版本</li>
+<li>最新的 Java 7 Demos and Samples Zip 文件</li>
+</ul>
+<p>准备条件</p>
+<p>在开始学习本教程之前, 你需要:</p>
+<ul>
+<li>下载并安装最新的 Java JDK (JDK 7 u9 或 以后的版本):</li>
+<li>Java 7 JDK 下载页面</li>
+<li>下载并安装 Demos and Samples (示例与样例) zip 文件, 下载页面和JDK相同. 然后解压到合适的位置. 如:</li>
+<li>C:\javademos</li>
+</ul>
+<h2 id="java-技术-和-jvm"><strong>Java 技术 和 JVM</strong><a class="headerlink" href="#java-技术-和-jvm" title="Permanent link">&para;</a></h2>
+<h3 id="java-概述"><strong>Java 概述</strong><a class="headerlink" href="#java-概述" title="Permanent link">&para;</a></h3>
+<p>Java 是 Sun Microsystems 公司在1995年发布的一门编程语言. 同时也是一个运行Java程序的底层平台. 提供工具、游戏和企业应用程序支持。Java 运行在全世界超过8.5亿的PC,以及数十亿的智能设备上,包括 mobile 和 TV. Java 是由许多关键部件组成的一个整体, 统称为Java平台。</p>
+<p>JRE(Java Runtime Edition)</p>
+<p>一般来说下载了Java以后, 你就得到了一个Java运行时: Java Runtime Environment (JRE). JRE 由Java虚拟机 Java Virtual Machine (JVM), Java 平台核心类(core classes), 以及 Java平台支持库组成. 必须有这三大组件的支持才能在你的电脑上运行 Java 程序. 例如 Java 7, 可以在操作系统上作为桌面应用程序运行, 还可以通过 Java Web Start 从Web上安装, 或者是作为嵌入式Web程序在浏览器中运行 (通过 JavaFX).</p>
+<p>Java 编程语言</p>
+<p>Java 是一门面向对象编程语言(object-oriented programming language), 包涵以下特性.</p>
+<ul>
+<li>Platform Independence – Java 应用程序被编译为字节码(bytecode)存放到 class 文件中, 由JVM加载. 因为程序在 JVM 中运行, 所以可以跨平台运行在各种操作系统/设备上.</li>
+<li>Object-Oriented – Java 是一门面向对象的语言, 继承了 C 和 C++ 的很多特性,并在此基础上进行扩充和优化.</li>
+<li>Automatic Garbage Collection – Java对内存进行 自动分配(allocates) 和自动释放(deallocates). 所以程序不再执行这一繁琐的任务(其实自动内存回收,更多的好处是减少了编程需要重复处理的这种细节,另一个例子是对JDBC的封装).</li>
+<li>Rich Standard Library – Java包含大量的标准对象,可以执行诸如输入输出(input/output), 网络操作以及日期处理等任务.</li>
+</ul>
+<p>JDK(Java Development Kit)</p>
+<p>JDK 是用来开发Java程序的一系列工具集. 通过JDK, 你可以编译用Java语言书写的程序, 并在 JVM 中运行. 另外, JDK 还提供了打包(packaging)和分发(distributing)程序的工具.</p>
+<p>JDK 和 JRE 使用同样的 Java Application Programming Interfaces (<a href="http://docs.oracle.com/javase/7/docs/api/">Java API</a>).Java API 是预先打包好以供程序员用来开发程序的类库集合. 通过 Java API 使得很多常规任务可以很轻松的就完成,如 字符串操作(string manipulation), 时间日期处理(date/time processing), 网络编程(networking), 以及实现各种数据结构(data structures, 如 lists, maps, stacks, and queues).</p>
+<p>JVM(Java Virtual Machine)</p>
+<p>Java Virtual Machine (JVM) 是一台抽象的计算机(abstract computing machine). JVM 本质是一个程序, 但在运行于JVM上的程序看来, 他就像一台真实机器一样. 这样, Java程序就能使用相同的接口和库. 每种特定操作系统上的 JVM 实现, 都将 Java 程序指令转换为本地机器的指令(instructions)和命令(commands). 由此,实现了Java程序的平台独立性.</p>
+<p>Java虚拟机的第一个原型实现,由 Sun Microsystems, Inc. 完成, 在一台手持设备上用软件模拟了 Java虚拟机指令集, 类似于今天的 PDA(Personal Digital Assistant). Oracle 当前在移动设备,桌面系统和服务器上都提供了Java虚拟机实现, 但Java虚拟机不限制使用任何特定的技术,硬件,或操作系统。JVM也不一定都是基于软件的,你可以直接在硬件CPU上实现JVM指令, 还可以芯片上实现,或者采用 microcode 的方式来实现.</p>
+<p>Java 虚拟机完全不关心Java语言的细节, 只识别 class 文件这种特定的二进制格式. 一个 class 文件包含 Java虚拟机指令(或称之为字节码 bytecode) 及符号变量表(symbol table), 还有一些辅助信息.</p>
+<p>基于安全性考虑, Java虚拟机对 class 文件中的代码执行 强语法检查和组成结构规范限制. 既然虚拟机有这种特征, 那么任何一门编程语言,只要能编译为合法的 class 文件，都可以加载到 Java虚拟机 里面执行。由于具有通用性,跨平台特性, 其他语言的实现者可以把Java虚拟机作为该语言的加载执行工具。(1) <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-1.html">The Java Virtual Machine</a></p>
+<h3 id="探索-jvm-体系架构"><strong>探索 JVM 体系架构</strong><a class="headerlink" href="#探索-jvm-体系架构" title="Permanent link">&para;</a></h3>
+<p>Hotspot 架构</p>
+<p>HotSpot JVM 有一个稳定强悍的架构, 支持强大的功能与特性, 具备实现高性能和大规模可伸缩性的能力。例如,HotSpot JVM JIT编译器能动态进行优化生成。换句话说,他们运行Java程序时,会针对底层系统架构动态生成高性能的本地机器指令。此外,通过成熟的演进和运行时环境的持续工程,加上多线程垃圾收集器,HotSpot JVM即使实在大型计算机系统上也能获得很高的伸缩性.</p>
+<p>​    <img alt="hotspot" src="../../../../g1/hotspot1.png" /></p>
+<p>JVM 的主要组件包括: 类加载器(class loader), 运行时数据区(runtime data areas), 以及执行引擎(execution engine).</p>
+<p>Hotspot 关键部分</p>
+<p>与性能(performance)有关的部分是 JVM 最重要的组件,下图中用高亮的颜色来显示.</p>
+<p>​    <img alt="hotspot" src="../../../../g1/hotspot2.png" /></p>
+<p>对JVM进行性能调优时有三大组件需要重点关注。堆(Heap)是存放对象的内存空间。这个区域由JVM启动时选择的垃圾收集器进行管理。大多数调优参数都是调整堆内存的大小,以及根据实际情况选择最合适的垃圾收集器. JIT编译器也对性能有很大的影响, 但新版本的JVM调优中很少需要关注.</p>
+<h3 id="性能基础"><strong>性能基础</strong><a class="headerlink" href="#性能基础" title="Permanent link">&para;</a></h3>
+<p>大多数情况下对 Java 程序进行调优, 主要关注两个目标之一: <strong>响应速度(responsiveness)</strong> 和/或 <strong>吞吐量(throughput)</strong>. 下面的教程中我们将讲述这些概念.</p>
+<p>响应能力(Responsiveness)</p>
+<p>响应能力就是程序或系统对一个请求的响应有多迅速. 比如:</p>
+<ul>
+<li>程序UI响应速度有多灵敏</li>
+<li>网站页面响应有多快</li>
+<li>数据库查询有多快</li>
+</ul>
+<p>对响应速度要求很高的系统, 较大的停顿时间(large pause times) 是不可接受的. 重点是在非常短的时间周期内快速响应.</p>
+<p>吞吐量(Throughput)</p>
+<p>吞吐量关注在一个特定时间段内应用系统的最大工作量。衡量吞吐量的指标/示例包括:</p>
+<ul>
+<li>给定时间内完成的事务数.</li>
+<li>每小时批处理系统能完成的作业(jobs)数量.</li>
+<li>每小时能完成多少次数据库查询</li>
+</ul>
+<p>在吞吐量方面优化的系统, 停顿时间长(High pause times)也是可以接受的。由于高吞吐量应用运行时间长,所以此时更关心的是如何尽可能快地完成整个任务，而不考虑快速响应。</p>
+<h2 id="g1-垃圾收集器garbage-collector"><strong>G1 垃圾收集器(Garbage Collector)</strong><a class="headerlink" href="#g1-垃圾收集器garbage-collector" title="Permanent link">&para;</a></h2>
+<h3 id="g1-垃圾收集器"><strong>G1 垃圾收集器</strong><a class="headerlink" href="#g1-垃圾收集器" title="Permanent link">&para;</a></h3>
+<p>G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征. 在Oracle JDK 7 update 4 及以上版本中得到完全支持, 专为以下应用程序设计:</p>
+<ul>
+<li>可以像CMS收集器一样,GC操作与应用的线程一起并发执行</li>
+<li>紧凑的空闲内存区间且没有很长的GC停顿时间.</li>
+<li>需要可预测的GC暂停耗时.</li>
+<li>不想牺牲太多吞吐量性能.</li>
+<li>启动后不需要请求更大的Java堆.</li>
+</ul>
+<p>G1的长期目标是取代CMS(Concurrent Mark-Sweep Collector, 并发标记-清除). 因为特性的不同使G1成为比CMS更好的解决方案. 一个区别是,G1是一款压缩型的收集器.G1通过有效的压缩完全避免了对细微空闲内存空间的分配,不用依赖于regions，这不仅大大简化了收集器，而且还消除了潜在的内存碎片问题。除压缩以外，G1的垃圾收集停顿也比CMS容易估计，也允许用户自定义所希望的停顿参数(pause targets)</p>
+<p>G1 操作概述</p>
+<p>上一代的垃圾收集器(串行serial, 并行parallel, 以及CMS)都把堆内存划分为固定大小的三个部分: 年轻代(young generation), 年老代(old generation), 以及持久代(permanent generation).</p>
+<p>​    <img alt="0" src="../../../../g1/hotspot3.png" /></p>
+<p>内存中的每个对象都存放在这三个区域中的一个.</p>
+<p>而 G1 收集器采用一种不同的方式来管理堆内存.</p>
+<p>​    <img alt="0" src="../../../../g1/g1.png" /></p>
+<p>堆内存被划分为多个大小相等的 heap 区,每个heap区都是逻辑上连续的一段内存(virtual memory). 其中一部分区域被当成老一代收集器相同的角色(eden, survivor, old), 但每个角色的区域个数都不是固定的。这在内存使用上提供了更多的灵活性。</p>
+<p>G1执行垃圾回收的处理方式与CMS相似. G1在全局标记阶段(global marking phase)并发执行, 以确定堆内存中哪些对象是存活的。标记阶段完成后,G1就可以知道哪些heap区的empty空间最大。它会首先回收这些区,通常会得到大量的自由空间. 这也是为什么这种垃圾收集方法叫做Garbage-First(垃圾优先)的原因。顾名思义, G1将精力集中放在可能布满可收回对象的区域, 可回收对象(reclaimable objects)也就是所谓的垃圾. G1使用暂停预测模型(pause prediction model)来达到用户定义的目标暂停时间,并根据目标暂停时间来选择此次进行垃圾回收的heap区域数量.</p>
+<p>被G1标记为适合回收的heap区将使用转移(evacuation)的方式进行垃圾回收. G1将一个或多个heap区域中的对象拷贝到其他的单个区域中,并在此过程中压缩和释放内存. 在多核CPU上转移是并行执行的(parallel on multi-processors), 这样能减少停顿时间并增加吞吐量. 因此,每次垃圾收集时, G1都会持续不断地减少碎片, 并且在用户给定的暂停时间内执行. 这比以前的方法强大了很多. CMS垃圾收集器(Concurrent Mark Sweep,并发标记清理)不进行压缩. ParallelOld 垃圾收集只对整个堆执行压缩,从而导致相当长的暂停时间。</p>
+<p>需要强调的是, G1并不是一款实时垃圾收集器(real-time collector). 能以极高的概率在设定的目标暂停时间内完成,但不保证绝对在这个时间内完成。 基于以前收集的各种监控数据, G1会根据用户指定的目标时间来预估能回收多少个heap区. 因此,收集器有一个相当精确的heap区耗时计算模型,并根据该模型来确定在给定时间内去回收哪些heap区.</p>
+<p>注意 G1分为两个阶段: 并发阶段(concurrent, 与应用线程一起运行, 如: 细化 refinement、标记 marking、清理 cleanup) 和 并行阶段(parallel, 多线程执行, 如: 停止所有JVM线程, stop the world). 而 FullGC(完整垃圾收集)仍然是单线程的, 但如果进行适当的调优,则应用程序应该能够避免 full GC。</p>
+<p>G1 的内存占用(Footprint)</p>
+<p>如果从 ParallelOldGC 或者 CMS收集器迁移到 G1, 您可能会看到JVM进程占用更多的内存(a larger JVM process size). 这在很大程度上与 “accounting” 数据结构有关, 如 Remembered Sets 和 Collection Sets.</p>
+<p>Remembered Sets 简称 RSets, 跟踪指向某个heap区内的对象引用. 堆内存中的每个区都有一个 RSet. RSet 使heap区能并行独立地进行垃圾集合. RSets的总体影响小于5%.</p>
+<p>Collection Sets 简称 CSets, 收集集合, 在一次GC中将执行垃圾回收的heap区. GC时在CSet中的所有存活数据(live data)都会被转移(复制/移动). 集合中的heap区可以是 Eden, survivor, 和/或 old generation. CSets所占用的JVM内存小于1%.</p>
+<p>推荐使用 G1 的场景(Recommended Use Cases)</p>
+<p>G1的首要目标是为需要大量内存的系统提供一个保证GC低延迟的解决方案. 也就是说堆内存在6GB及以上,稳定和可预测的暂停时间小于0.5秒.</p>
+<p>如果应用程序具有如下的一个或多个特征,那么将垃圾收集器从CMS或ParallelOldGC切换到G1将会大大提升性能.</p>
+<ul>
+<li>Full GC 次数太频繁或者消耗时间太长.</li>
+<li>对象分配的频率或代数提升(promotion)显著变化.</li>
+<li>受够了太长的垃圾回收或内存整理时间(超过0.5~1秒)</li>
+</ul>
+<p>注意: 如果正在使用CMS或ParallelOldGC,而应用程序的垃圾收集停顿时间并不长,那么继续使用现在的垃圾收集器是个好主意. 使用最新的JDK时并不要求切换到G1收集器。</p>
+<h2 id="cms的gc概述"><strong>CMS的GC概述</strong><a class="headerlink" href="#cms的gc概述" title="Permanent link">&para;</a></h2>
+<h3 id="分代gcgenerational-gc与-cms"><strong>分代GC(Generational GC)与 CMS</strong><a class="headerlink" href="#分代gcgenerational-gc与-cms" title="Permanent link">&para;</a></h3>
+<p>并发标记清理(CMS, Concurrent Mark Sweep)收集器(也称为多并发低暂停的收集器)回收老年代内存(tenured generation). 它将垃圾回收中的绝大部分工作与应用程序的线程一起并发执行,以期能最小化暂停时间. 通常多并发低暂停收集器收集器不复制或也不压缩存活的对象. 垃圾回收不移动存活的对象, 如果产生内存碎片问题,就会分配/占用更大的堆内存空间。</p>
+<p>注意: 年轻代使用的CMS收集器也和并行收集器采用一样的算法.</p>
+<p>CMS 垃圾收集阶段划分(Collection Phases)</p>
+<p>CMS收集器在老年代堆内存的回收中执行分为以下阶段:</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(1) 初始标记 (Initial Mark)</td>
+<td>(Stop the World Event,所有应用线程暂停) 在老年代(old generation)中的对象, 如果从年轻代(young generation)中能访问到, 则被 “标记,marked” 为可达的(reachable).对象在旧一代“标志”可以包括这些对象可能可以从年轻一代。暂停时间一般持续时间较短,相对小的收集暂停时间.</td>
+</tr>
+<tr>
+<td>(2) 并发标记 (Concurrent Marking)</td>
+<td>在Java应用程序线程运行的同时遍历老年代(tenured generation)的可达对象图。扫描从被标记的对象开始,直到遍历完从root可达的所有对象. 调整器(mutators)在并发阶段的2、3、5阶段执行,在这些阶段中新分配的所有对象(包括被提升的对象)都立刻标记为存活状态.</td>
+</tr>
+<tr>
+<td>(3) 再次标记(Remark)</td>
+<td>(Stop the World Event, 所有应用线程暂停) 查找在并发标记阶段漏过的对象，这些对象是在并发收集器完成对象跟踪之后由应用线程更新的.</td>
+</tr>
+<tr>
+<td>(4) 并发清理(Concurrent Sweep)</td>
+<td>回收在标记阶段(marking phases)确定为不可及的对象. 死对象的回收将此对象占用的空间增加到一个空闲列表(free list),供以后的分配使用。死对象的合并可能在此时发生. 请注意,存活的对象并没有被移动.</td>
+</tr>
+<tr>
+<td>(5) 重置(Resetting)</td>
+<td>清理数据结构,为下一个并发收集做准备.</td>
+</tr>
+</tbody>
+</table>
+<p>CMS的GC步骤</p>
+<p>接下来,让我们一步步地讲述CMS收集器的操作.</p>
+<p>1、 CMS的堆内存结构(Heap Structure)</p>
+<p>堆内存被分为3个空间.</p>
+<p>​    <img alt="0" src="../../../../g1/cms1.png" /></p>
+<p>年轻代(Young generation)分为 1个新生代空间(Eden)和2个存活区(survivor spaces). 老年代(Old generation)是一大块连续的空间, 垃圾回收(Object collection)就地解决(is done in place), 除了 Full GC, 否则不会进行压缩(compaction).</p>
+<p>2、 CMS年轻代(Young) GC 的工作方式</p>
+<p>年轻代(young generation)用高亮的绿色表示, 老年代(old generation)用蓝色表示。如果程序运行了一段时间,那么 CMS 看起来就像下图这个样子. 对象散落在老年代中的各处地方.</p>
+<p>​    <img alt="0" src="../../../../g1/cmsygc.png" /></p>
+<p>在使用 CMS 时, 老年代的对象回收就地进行(deallocated in place). 他们不会被移动到其他地方. 除了 Full GC, 否则内存空间不会进行压缩.</p>
+<p>3、 年轻代垃圾回收(Young Generation Collection)</p>
+<p>Eden区和survivor区中的存活对象被拷贝到另一个空的survivor 区. 存活时间更长,达到阀值的对象会被提升到老年代(promoted to old generation).</p>
+<p>​    <img alt="0" src="../../../../g1/cmsygc2.png" /></p>
+<p>4、 年轻代(Young) GC 之后</p>
+<p>年轻代(Young)进行一次垃圾回收之后, Eden 区被清理干净(cleared),两个 survivor 区中的一个也被清理干净了. 如下图所示:</p>
+<p>​    <img alt="0" src="../../../../g1/cmsygc3.png" /></p>
+<p>图中新提升的对象用深蓝色来标识. 绿色的部分是年轻代中存活的对象,但还没被提升到老年代中.</p>
+<p>5、 CMS的老年代回收(Old Generation Collection)</p>
+<p>两次stop the world事件发生在: 初始标记(initial mark)以及重新标记(remark)阶段. 当老年代达到一定的占有率时,CMS垃圾回收器就开始工作.</p>
+<p>​    <img alt="0" src="../../../../g1/cmsogc.png" /></p>
+<p>(1) 初始标记(Initial mark)阶段的停顿时间很短,在此阶段存活的(live,reachable,可及的) 对象被记下来. (2) 并发标记(Concurrent marking)在程序继续运行的同时找出存活的对象. 最后, 在第(3)阶段(remark phase), 查找在第(2)阶段(concurrent marking)中错过的对象.</p>
+<p>6、 老年代回收 – 并发清理(Concurrent Sweep)</p>
+<p>在前面阶段未被标记的对象将会就地释放(deallocated in place). 此处没有压缩(compaction).</p>
+<p>​    <img alt="0" src="../../../../g1/cmsogc2.png" /></p>
+<p>备注: 未标记(Unmarked)的对象 == 已死对象(Dead Objects)</p>
+<p>7、 老年代回收 – 清理之后(After Sweeping)</p>
+<p>在第(4)步(Sweeping phase)之后, 可以看到很多内存被释放了. 还应该注意到,这里并没有执行内存压缩整理(no compaction).</p>
+<p>​    <img alt="0" src="../../../../g1/cmsogc3.png" /></p>
+<p>最后, CMS 收集器进入(move through)第(5)阶段, 重置(resetting phase), 然后等候下一次的GC阀值到来(GC threshold).</p>
+<h2 id="g1垃圾收集器概述"><strong>G1垃圾收集器概述</strong><a class="headerlink" href="#g1垃圾收集器概述" title="Permanent link">&para;</a></h2>
+<h3 id="一步步介绍g1"><strong>一步步介绍G1</strong><a class="headerlink" href="#一步步介绍g1" title="Permanent link">&para;</a></h3>
+<p>G1收集器采用一种不同的方式来分配堆. 下面通过图解的方式一步步地讲述G1系统.</p>
+<p>1、 G1的堆内存结构</p>
+<p>堆内存被划分为固定大小的多个区域.</p>
+<p>​    <img alt="0" src="../../../../g1/g1gc.png" /></p>
+<p>每个heap区(Region)的大小在JVM启动时就确定了. JVM 通常生成 2000 个左右的heap区, 根据堆内存的总大小,区的size范围允许为 1Mb 到 32Mb.</p>
+<p>2、 G1 堆空间分配</p>
+<p>实际上,这些区域(regions)被映射为逻辑上的 Eden, Survivor, 和 old generation(老年代)空间.</p>
+<p>​    <img alt="0" src="../../../../g1/g1gcheap.png" /></p>
+<p>图中的颜色标识了每一个区域属于哪个角色. 存活的对象从一块区域转移(复制或移动)到另一块区域。设计成 heap 区的目的是为了并行地进行垃圾回收(的同时停止/或不停止其他应用程序线程).</p>
+<p>如图所示,heap区可以分配为 Eden, Survivor, 或 old generation(老年代)区. 此外,还有第四种类型的对象被称为巨无霸区域(Humongous regions),这种巨无霸区是设计了用来保存比<strong>标准块</strong>(standard region)大50%及以上的对象, 它们存储在一组连续的区中. 最后一个类型是堆内存中的未使用区(unused areas).</p>
+<p>备注: 截止英文原文发表时,巨无霸对象的回收还没有得到优化. 因此,您应该尽量避免创建太大(大于32MB?)的对象.</p>
+<p>3、 G1中的年轻代(Young Generation)</p>
+<p>堆被分为大约2000个区. 最小size为1 Mb, 最大size为 32Mb. 蓝色的区保存老年代对象,绿色区域保存年轻代对象.</p>
+<p>​    <img alt="0" src="../../../../g1/g1ygc.png" /></p>
+<p>注意G1中各代的heap区不像老一代垃圾收集器一样要求各部分是连续的.</p>
+<p>4、 G1中的一次年轻代GC</p>
+<p>存活的对象被转移(copied or moved)到一个/或多个存活区(survivor regions). 如果存活时间达到阀值,这部分对象就会被提升到老年代(promoted to old generation regions).</p>
+<p>​    <img alt="0" src="../../../../g1/g1ygc2.png" /></p>
+<p>此时会有一次 stop the world(STW)暂停. 会计算出 Eden大小和 survivor 大小,给下一次年轻代GC使用. 清单统计信息(Accounting)保存了用来辅助计算size. 诸如暂停时间目标之类的东西也会纳入考虑.</p>
+<p>这种方法使得调整各代区域的尺寸很容易, 让其更大或更小一些以满足需要.</p>
+<p>5、 G1的一次年轻代GC完成后</p>
+<p>存活对象被转移到存活区(survivor regions) 或 老年代(old generation regions).</p>
+<p>​    <img alt="0" src="../../../../g1/g1ygc3.png" /></p>
+<p>刚刚被提升上来的对象用深绿色显示. Survivor 区用绿色表示.</p>
+<p>总结起来,G1的年轻代收集归纳如下:</p>
+<ul>
+<li>堆一整块内存空间,被分为多个heap区(regions).</li>
+<li>年轻代内存由一组不连续的heap区组成. 这使得在需要时很容易进行容量调整.</li>
+<li>年轻代的垃圾收集,或者叫 young GCs, 会有 stop the world 事件. 在操作时所有的应用程序线程都会被暂停(stopped).</li>
+<li>年轻代 GC 通过多线程并行进行.</li>
+<li>存活的对象被拷贝到新的 survivor 区或者老年代.</li>
+</ul>
+<h3 id="old-generation-collection-with-g1"><strong>Old Generation Collection with G1</strong><a class="headerlink" href="#old-generation-collection-with-g1" title="Permanent link">&para;</a></h3>
+<p>和 CMS 收集器相似, G1 收集器也被设计为用来对老年代的对象进行低延迟(low pause)的垃圾收集. 下表描述了G1收集器在老年代进行垃圾回收的各个阶段.</p>
+<p>G1 收集阶段 – 并发标记周期阶段(Concurrent Marking Cycle Phases)</p>
+<p>G1 收集器在老年代堆内存中执行下面的这些阶段. 注意有些阶段也是年轻代垃圾收集的一部分.</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(1) 初始标记(Initial Mark)</td>
+<td>(Stop the World Event,所有应用线程暂停) 此时会有一次 stop the world(STW)暂停事件. 在G1中, 这附加在(piggybacked on)一次正常的年轻代GC. 标记可能有引用指向老年代对象的survivor区(根regions).</td>
+</tr>
+<tr>
+<td>(2) 扫描根区域(Root Region Scanning)</td>
+<td>扫描 survivor 区中引用到老年代的引用. 这个阶段应用程序的线程会继续运行. 在年轻代GC可能发生之前此阶段必须完成.</td>
+</tr>
+<tr>
+<td>(3) 并发标记(Concurrent Marking)</td>
+<td>在整个堆中查找活着的对象. 此阶段应用程序的线程正在运行. 此阶段可以被年轻代GC打断(interrupted).</td>
+</tr>
+<tr>
+<td>(4) 再次标记(Remark)</td>
+<td>(Stop the World Event,所有应用线程暂停) 完成堆内存中存活对象的标记. 使用一个叫做 snapshot-at-the-beginning(SATB, 起始快照)的算法, 该算法比CMS所使用的算法要快速的多.</td>
+</tr>
+<tr>
+<td>(5) 清理(Cleanup)</td>
+<td>(Stop the World Event,所有应用线程暂停,并发执行)在存活对象和完全空闲的区域上执行统计(accounting). (Stop the world)擦写 Remembered Sets. (Stop the world)重置空heap区并将他们返还给空闲列表(free list). (Concurrent, 并发)</td>
+</tr>
+<tr>
+<td>(*) 拷贝(Copying)</td>
+<td>(Stop the World Event,所有应用线程暂停) 产生STW事件来转移或拷贝存活的对象到新的未使用的heap区(new unused regions). 只在年轻代发生时日志会记录为 <code>[GC pause (young)]</code>. 如果在年轻代和老年代一起执行则会被日志记录为 <code>[GC Pause (mixed)]</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>G1老年代收集步骤</p>
+<p>顺着定义的阶段,让我们看看G1收集器如何处理老年代(old generation).</p>
+<p>6、 初始标记阶段(Initial Marking Phase)</p>
+<p>存活对象的初始标记被固定在年轻代垃圾收集里面. 在日志中被记为 GC pause (young)(inital-mark)。</p>
+<p>​    <img alt="0" src="../../../../g1/cshbj.png" /></p>
+<p>7、 并发标记阶段(Concurrent Marking Phase)</p>
+<p>如果找到空的区域(如用红叉“X”标示的区域), 则会在 Remark 阶段立即移除. 当然,”清单(accounting)”信息决定了活跃度(liveness)的计算.</p>
+<p>​    <img alt="0" src="../../../../g1/bfbj.png" /></p>
+<p>8、 再次标记阶段(Remark Phase)</p>
+<p>空的区域被移除并回收。现在计算所有区域的活跃度(Region liveness).</p>
+<p>​    <img alt="0" src="../../../../g1/zcbj.png" /></p>
+<p>9、 拷贝/清理阶段(Copying/Cleanup)</p>
+<p>G1选择“活跃度(liveness)”最低的区域, 这些区域可以最快的完成回收. 然后这些区域和年轻代GC在同时被垃圾收集 . 在日志被标识为 [GC pause (mixed)]. 所以年轻代和老年代都在同一时间被垃圾收集.</p>
+<p>​    <img alt="0" src="../../../../g1/copy.png" /></p>
+<p>10、拷贝/清理之后(After Copying/Cleanup)</p>
+<p>所选择的区域被收集和压缩到下图所示的深蓝色区域和深绿色区域.</p>
+<p>​    <img alt="0" src="../../../../g1/copy2.png" /></p>
+<p>老年代GC(Old Generation GC)总结</p>
+<p>总结下来,G1对老年代的GC有如下几个关键点:</p>
+<ul>
+<li>
+<p>并发标记清理阶段(Concurrent Marking Phase)</p>
+</li>
+<li>
+<ul>
+<li>活跃度信息在程序运行的时候被并行计算出来</li>
+</ul>
+</li>
+<li>活跃度(liveness)信息标识出哪些区域在转移暂停期间最适合回收.</li>
+<li>
+<p>不像CMS一样有清理阶段(sweeping phase).</p>
+</li>
+<li>
+<p>再次标记阶段(Remark Phase)</p>
+</li>
+<li>
+<ul>
+<li>使用的 Snapshot-at-the-Beginning (SATB, 开始快照) 算法比起 CMS所用的算法要快得多.</li>
+</ul>
+</li>
+<li>
+<p>完全空的区域直接被回收.</p>
+</li>
+<li>
+<p>拷贝/清理阶段(Copying/Cleanup Phase)</p>
+</li>
+<li>
+<ul>
+<li>年轻代与老年代同时进行回收.</li>
+</ul>
+</li>
+<li>老年代的选择基于其活跃度(liveness).</li>
+</ul>
+<h2 id="命令行参数与最佳实践"><strong>命令行参数与最佳实践</strong><a class="headerlink" href="#命令行参数与最佳实践" title="Permanent link">&para;</a></h2>
+<h3 id="命令行参数与最佳实践_1"><strong>命令行参数与最佳实践</strong><a class="headerlink" href="#命令行参数与最佳实践_1" title="Permanent link">&para;</a></h3>
+<p>在本节中,让我们看看G1的各种命令行选项.</p>
+<p>命令行基本参数</p>
+<p>要启用 G1 收集器请使用: -XX:+UseG1GC</p>
+<p>下面是启动 Java2Demo示例程序的命令行示例. Java2Demo位于下载 JDK demos and samples 后解压的文件夹中:</p>
+<p>java -Xmx50m -Xms50m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -jar c:\javademos\demo\jfc\Java2D\Java2demo.jar</p>
+<p>关键命令行开关</p>
+<p>-XX:+UseG1GC – 让 JVM 使用 G1 垃圾收集器.</p>
+<p>-XX:MaxGCPauseMillis=200 – 设置最大GC停顿时间(GC pause time)指标(target). 这是一个软性指标(soft goal), JVM 会尽力去达成这个目标. 所以有时候这个目标并不能达成. 默认值为 200 毫秒.</p>
+<p>-XX:InitiatingHeapOccupancyPercent=45 – 启动并发GC时的堆内存占用百分比. G1用它来触发并发GC周期,基于整个堆的使用率,而不只是某一代内存的使用比例。值为 0 则表示“一直执行GC循环)’. 默认值为 45 (例如, 全部的 45% 或者使用了45%).</p>
+<p>最佳实践</p>
+<p>在使用 G1 作为垃圾收集器时,你应该遵循下面这些最佳实践的指导.</p>
+<p>不要设置年轻代的大小(Young Generation Size)</p>
+<p>假若通过 -Xmn 显式地指定了年轻代的大小, 则会干扰到 G1收集器的默认行为.</p>
+<ul>
+<li>G1在垃圾收集时将不再关心暂停时间指标. 所以从本质上说,设置年轻代的大小将禁用暂停时间目标.</li>
+<li>G1在必要时也不能够增加或者缩小年轻代的空间. 因为大小是固定的,所以对更改大小无能为力.</li>
+</ul>
+<p>响应时间指标(Response Time Metrics)</p>
+<p>设置 XX:MaxGCPauseMillis= 时不应该使用平均响应时间(ART, average response time) 作为指标,而应该考虑使用目标时间的90%或者更大作为响应时间指标. 也就是说90%的用户(客户端/?)请求响应时间不会超过预设的目标值. 记住,暂停时间只是一个目标,并不能保证总是得到满足.</p>
+<p>什么是转移失败(Evacuation Failure)?</p>
+<p>对 survivors 或 promoted objects 进行GC时如果JVM的heap区不足就会发生提升失败(promotion failure). 堆内存不能继续扩充,因为已经达到最大值了. 当使用 -XX:+PrintGCDetails 时将会在GC日志中显示 to-space overflow (to-空间溢出)。</p>
+<p>这是很昂贵的操作!</p>
+<ul>
+<li>GC仍继续所以空间必须被释放.</li>
+<li>拷贝失败的对象必须被放到正确的位置(tenured in place).</li>
+<li>CSet指向区域中的任何 RSets 更新都必须重新生成(regenerated).</li>
+<li>所有这些步骤都是代价高昂的.</li>
+</ul>
+<p>如何避免转移失败(Evacuation Failure)</p>
+<p>要避免避免转移失败, 考虑采纳下列选项.</p>
+<ul>
+<li>
+<p>增加堆内存大小</p>
+</li>
+<li>
+<ul>
+<li>增加 -XX:G1ReservePercent=n, 其默认值是 10.</li>
+</ul>
+</li>
+<li>
+<p>G1创建了一个假天花板(false ceiling),在需要更大 ‘to-space’ 的情况下会尝试从保留内存获取(leave the reserve memory free).</p>
+</li>
+<li>
+<p>更早启动标记周期(marking cycle)</p>
+</li>
+<li>
+<p>通过采用 -XX:ConcGCThreads=n 选项增加标记线程(marking threads)的数量.</p>
+</li>
+</ul>
+<p>G1 的 GC 参数完全列表</p>
+<p>下面是完整的 G1 的 GC 开关参数列表. 在使用时请记住上面所述的最佳实践.</p>
+<table>
+<thead>
+<tr>
+<th>选项/默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-XX:+UseG1GC</td>
+<td>使用 G1 (Garbage First) 垃圾收集器</td>
+</tr>
+<tr>
+<td>-XX:MaxGCPauseMillis=n</td>
+<td>设置最大GC停顿时间(GC pause time)指标(target). 这是一个软性指标(soft goal), JVM 会尽量去达成这个目标.</td>
+</tr>
+<tr>
+<td>-XX:InitiatingHeapOccupancyPercent=n</td>
+<td>启动并发GC周期时的堆内存占用百分比. G1之类的垃圾收集器用它来触发并发GC周期,基于整个堆的使用率,而不只是某一代内存的使用比. 值为 0 则表示”一直执行GC循环”. 默认值为 45.</td>
+</tr>
+<tr>
+<td>-XX:NewRatio=n</td>
+<td>新生代与老生代(new/old generation)的大小比例(Ratio). 默认值为 2.</td>
+</tr>
+<tr>
+<td>-XX:SurvivorRatio=n</td>
+<td>eden/survivor 空间大小的比例(Ratio). 默认值为 8.</td>
+</tr>
+<tr>
+<td>-XX:MaxTenuringThreshold=n</td>
+<td>提升年老代的最大临界值(tenuring threshold). 默认值为 15.</td>
+</tr>
+<tr>
+<td>-XX:ParallelGCThreads=n</td>
+<td>设置垃圾收集器在并行阶段使用的线程数,默认值随JVM运行的平台不同而不同.</td>
+</tr>
+<tr>
+<td>-XX:ConcGCThreads=n</td>
+<td>并发垃圾收集器使用的线程数量. 默认值随JVM运行的平台不同而不同.</td>
+</tr>
+<tr>
+<td>-XX:G1ReservePercent=n</td>
+<td>设置堆内存保留为假天花板的总量,以降低提升失败的可能性. 默认值是 10.</td>
+</tr>
+<tr>
+<td>-XX:G1HeapRegionSize=n</td>
+<td>使用G1时Java堆会被分为大小统一的的区(region)。此参数可以指定每个heap区的大小. 默认值将根据 heap size 算出最优解. 最小值为 1Mb, 最大值为 32Mb.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="记录g1的gc日志"><strong>记录G1的GC日志</strong><a class="headerlink" href="#记录g1的gc日志" title="Permanent link">&para;</a></h2>
+<h3 id="记录g1的gc日志_1"><strong>记录G1的GC日志</strong><a class="headerlink" href="#记录g1的gc日志_1" title="Permanent link">&para;</a></h3>
+<p>我们要介绍的最后一个主题是使用日志信息来分享G1收集器的性能. 本节简要介绍垃圾收集的相关参数,以及日志中打印的相关信息.</p>
+<p>设置日志细节(Log Detail)</p>
+<p>可以设置3种不同的日志级别.</p>
+<p>(1) -verbosegc (等价于 -XX:+PrintGC) 设置日志级别为 好 fine.</p>
+<p>日志输出示例</p>
+<div class="highlight"><pre><span></span><code>[GC pause (G1 Humongous Allocation) (young) (initial-mark) 24M- &gt;21M(64M), 0.2349730 secs] 
+[GC pause (G1 Evacuation Pause) (mixed) 66M-&gt;21M(236M), 0.1625268 secs]                  
+</code></pre></div>
+<p>(2) -XX:+PrintGCDetails 设置日志级别为 更好 finer. 使用此选项会显示以下信息:</p>
+<ul>
+<li>每个阶段的 Average, Min, 以及 Max 时间.</li>
+<li>根扫描(Root Scan), RSet 更新(同时处理缓冲区信息), RSet扫描(Scan), 对象拷贝(Object Copy), 终止(Termination, 包括尝试次数).</li>
+<li>还显示 “other” 执行时间, 比如选择 CSet, 引用处理(reference processing), 引用排队(reference enqueuing) 以及释放(freeing) CSet等.</li>
+<li>显示 Eden, Survivors 以及总的 Heap 占用信息(occupancies).</li>
+</ul>
+<p>日志输出示例</p>
+<div class="highlight"><pre><span></span><code>[Ext Root Scanning (ms): Avg: 1.7 Min: 0.0 Max: 3.7 Diff: 3.7] 
+[Eden: 818M(818M)-&gt;0B(714M) Survivors: 0B-&gt;104M Heap: 836M(4096M)-&gt;409M(4096M)]    
+</code></pre></div>
+<p>​          </p>
+<p>(3) -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest 设置日志级别为 最好 finest. 和 finer 级别类似, 包含每个 worker 线程信息.</p>
+<div class="highlight"><pre><span></span><code>[Ext Root Scanning (ms): 2.1 2.4 2.0 0.0           
+            Avg: 1.6 Min: 0.0 Max: 2.4 Diff: 2.3]       
+[Update RS (ms):  0.4  0.2  0.4  0.0           
+             Avg: 0.2 Min: 0.0 Max: 0.4 Diff: 0.4]           
+[Processed Buffers : 5 1 10 0          
+             Sum: 16, Avg: 4, Min: 0, Max: 10, Diff: 10] 
+</code></pre></div>
+<p>​            </p>
+<p>Determining Time</p>
+<p>有两个参数决定了GC日志中打印的时间显示形式.</p>
+<p>(1) -XX:+PrintGCTimeStamps – 显示从JVM启动时算起的运行时间.</p>
+<p>日志输出示例</p>
+<div class="highlight"><pre><span></span><code>1.729: [GC pause (young) 46M-&gt;35M(1332M), 0.0310029 secs]  
+</code></pre></div>
+<p>(2) -XX:+PrintGCDateStamps – 在每条记录前加上日期时间.</p>
+<p>日志输出示例</p>
+<div class="highlight"><pre><span></span><code>2012-05-02T11:16:32.057+0200: [GC pause (young) 46M-&gt;35M(1332M), 0.0317225 secs]     
+</code></pre></div>
+<p>理解 G1 日志</p>
+<p>为了使你更好地理解GC日志, 本节通过实际的日志输出，定义了许多专业术语. 下面的例子显示了GC日志的内容,并加上日志中出现的术语和值的解释说明.</p>
+<p>Note: 更多信息请参考 <a href="https://blogs.oracle.com/poonam/entry/understanding_g1_gc_logs">Poonam Bajaj的博客： G1垃圾回收日志</a>.</p>
+<p>G1 日志相关术语</p>
+<ul>
+<li>Clear CT</li>
+<li>CSet</li>
+<li>External Root Scanning</li>
+<li>Free CSet</li>
+<li>GC Worker End</li>
+<li>GC Worker Other</li>
+<li>Object Copy</li>
+<li>Other</li>
+<li>Parallel Time</li>
+<li>Ref Eng</li>
+<li>Ref Proc</li>
+<li>Scanning Remembered Sets</li>
+<li>Termination Time</li>
+<li>Update Remembered Set</li>
+<li>Worker Start</li>
+</ul>
+<p>Parallel Time(并行阶段耗时)</p>
+<div class="highlight"><pre><span></span><code>414.557: [GC pause (young), 0.03039600 secs] [Parallel Time: 22.9 ms] 
+[GC Worker Start (ms): 7096.0 7096.0 7096.1 7096.1 706.1 7096.1 7096.1 7096.1 7096.2 7096.2 7096.2 7096.2       
+                    Avg: 7096.1, Min: 7096.0, Max: 7096.2, Diff: 0.2]              
+</code></pre></div>
+<p>Parallel Time – 主要并行部分运行停顿的整体时间</p>
+<p>Worker Start – 各个工作线程(workers)启动时的时间戳(Timestamp)</p>
+<p>Note: 日志是根据 thread id 排序,并且每条记录都是一致的.</p>
+<p>External Root Scanning(外部根扫描)</p>
+<div class="highlight"><pre><span></span><code>[Ext Root Scanning (ms): 3.1 3.4 3.4 3.0 4.2 2.0 3.6 3.2 3.4 7.7 3.7 4.4     
+    Avg: 3.8, Min: 2.0, Max: 7.7, Diff: 5.7]  
+</code></pre></div>
+<p>External root scanning - 扫描外部根花费的时间(如指向堆内存的系统词典(system dictionary)等部分)</p>
+<p>Update Remembered Set(更新 RSet)</p>
+<div class="highlight"><pre><span></span><code> [Update RS (ms): 0.1 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 Avg: 0.0, Min: 0.0, Max: 0.1, Diff: 0.1]  
+ [Processed Buffers : 26 0 0 0 0 0 0 0 0 0 0 0    
+ Sum: 26, Avg: 2, Min: 0, Max: 26, Diff: 26]   
+</code></pre></div>
+<p>​           </p>
+<p>Update Remembered Set - 必须更新在pause之前已经完成但尚未处理的缓冲. 花费的时间取决于cards的密度。cards越多,耗费的时间就越长。</p>
+<p>Scanning Remembered Sets(扫描 RSets)</p>
+<div class="highlight"><pre><span></span><code>[Scan RS (ms): 0.4 0.2 0.1 0.3 0.0 0.0 0.1 0.2 0.0 0.1 0.0 0.0 Avg: 0.1, Min: 0.0, Max: 0.4, Diff: 0.3]F     
+</code></pre></div>
+<p>Scanning Remembered Sets - 查找指向 Collection Set 的指针(pointers)</p>
+<p>Object Copy(对象拷贝)</p>
+<div class="highlight"><pre><span></span><code>  [Object Copy (ms): 16.7 16.7 16.7 16.9 16.0 18.1 16.5 16.8 16.7 12.3 16.4 15.7 Avg: 16.3, Min: 12.3, Max:  18.1, Diff: 5.8]     
+</code></pre></div>
+<p>Object copy – 每个独立的线程在拷贝和转移对象时所消耗的时间.</p>
+<p>Termination Time(结束时间)</p>
+<div class="highlight"><pre><span></span><code> [Termination (ms): 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+ Avg: 0.0, Min: 0.0, Max: 0.0, Diff: 0.0] [Termination Attempts : 1 1 1 1 1 1 1 1 1 1 1 1 Sum: 12, Avg: 1, Min: 1, Max: 1, Diff: 0]     
+</code></pre></div>
+<p>​         </p>
+<p>Termination time - 当worker线程完成了自己那部分对象的复制和扫描,就进入终止协议(termination protocol)。它查找未完成的工作(looks for work to steal), 一旦它完成就会再进入终止协议。 终止尝试记录(Termination attempt counts)所有查找工作的尝试次数(attempts to steal work).</p>
+<p>GC Worker End</p>
+<div class="highlight"><pre><span></span><code> [GC Worker End (ms): 7116.4 7116.3 7116.4 7116.3 7116.4 7116.3 7116.4 7116.4 7116.4 7116.4 7116.3 7116.3    
+ Avg: 7116.4, Min: 7116.3, Max: 7116.4, Diff:   0.1] 
+ [GC Worker (ms): 20.4 20.3 20.3 20.2 20.3 20.2 20.2 20.2 20.3 20.2 20.1 20.1     
+ Avg: 20.2, Min: 20.1, Max: 20.4, Diff: 0.3]     
+</code></pre></div>
+<p>​       </p>
+<p>GC worker end time – 独立的 GC worker 停止时的时间戳.</p>
+<p>GC worker time – 每个独立的 GC worker 线程消耗的时间.</p>
+<p>GC Worker Other</p>
+<div class="highlight"><pre><span></span><code>[GC Worker Other (ms): 2.6 2.6 2.7 2.7 2.7 2.7 2.7 2.8 2.8 2.8 2.8 2.8    
+Avg: 2.7, Min: 2.6, Max: 2.8, Diff: 0.2]  
+</code></pre></div>
+<p>GC worker other – 每个GC线程中不能归属到之前列出的worker阶段的其他时间. 这个值应该很低. 过去我们见过很高的值,是由于JVM的其他部分的瓶颈引起的(例如在分层[Tiered]代码缓存[Code Cache]占有率的增加)。</p>
+<p>Clear CT</p>
+<div class="highlight"><pre><span></span><code>[Clear CT: 0.6 ms] 
+</code></pre></div>
+<p>​             </p>
+<p>清除 RSet 扫描元数据(scanning meta-data)的 card table 消耗的时间.</p>
+<p>Other</p>
+<div class="highlight"><pre><span></span><code>[Other: 6.8 ms]     
+</code></pre></div>
+<p>其他各种GC暂停的连续阶段花费的时间.</p>
+<p>CSet</p>
+<div class="highlight"><pre><span></span><code>[Choose CSet: 0.1 ms]                        
+</code></pre></div>
+<p>敲定要进行垃圾回收的region集合时消耗的时间. 通常很小,在必须选择 old 区时会稍微长一点点.</p>
+<p>Ref Proc</p>
+<div class="highlight"><pre><span></span><code>[Ref Proc: 4.4 ms]                          
+</code></pre></div>
+<p>处理 soft, weak, 等引用所花费的时间,不同于前面的GC阶段</p>
+<p>Ref Enq</p>
+<div class="highlight"><pre><span></span><code> [Ref Enq: 0.1 ms]                   
+</code></pre></div>
+<p>将 soft, weak, 等引用放置到待处理列表(pending list)花费的时间.</p>
+<p>Free CSet</p>
+<div class="highlight"><pre><span></span><code> [Free CSet: 2.0 ms]                       
+</code></pre></div>
+<p>释放刚被垃圾收集的 heap区所消耗的时间,包括对应的remembered sets。</p>
+<h2 id="总结"><strong>总结</strong><a class="headerlink" href="#总结" title="Permanent link">&para;</a></h2>
+<p>在此OBE中, 您对Java JVM 中的G1垃圾收集器有了个大致的了解。首先你学到了为何堆和垃圾收集器是所有Java JVM的关键部分。接下来讲述了使用CMS和G1收集器进行垃圾回收的工作方式. 接下来,您了解了G1的命令行参数/开关以及和使用它们的最佳实践。最后,您了解了日志对象以及GC日志中的数据。</p>
+<p>在本教程中,你学到了这些知识:</p>
+<ul>
+<li>Java JVM 的组成部分</li>
+<li>对 G1 的概述</li>
+<li>概述 CMS 垃圾收集器</li>
+<li>概述 G1 垃圾收集器</li>
+<li>命令行参数与最佳实践</li>
+<li>G1 的日志信息</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+  data-repo="leoalasiga/myGicus"
+  data-repo-id="R_kgDOL_8gew"
+  data-category="General"
+  data-category-id="DIC_kwDOL_8ge84Cfk89"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="1"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async>
+</script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../http%E7%8A%B6%E6%80%81%E7%A0%81/" class="md-footer__link md-footer__link--prev" aria-label="上一页: HTTP状态码">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                HTTP状态码
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 leoalasiaga
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/leoalasiga" target="_blank" rel="noopener" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://leoalasiga.github.io" target="_blank" rel="noopener me" title="leoalasiga" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.5 102.5 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5m-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.top", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.prune", "navigation.footer", "content.code.annotate", "content.code.copy", "toc.integrate", "toc.follow", "search.suggest", "search.highlight", "search.share", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
