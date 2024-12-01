@@ -15,6 +15,8 @@ redis开启工作空间通知
 
 redis的配置文件设置：**notify-keyspace-events** 
 
+<!-- more -->
+
 notify-keyspace-events的参数值可以是以下字符的任意组合，它指定了服务器该发送哪些类型的通知。该参数将针对整个实例（所有DB）启用通知，启用后会额外消耗CPU，更多信息请参见[Redis keyspace notifications](https://redis.io/docs/manual/keyspace-notifications/)。
 
 - K：键空间通知，所有通知以__keyspace@__为前缀。

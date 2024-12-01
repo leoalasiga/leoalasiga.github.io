@@ -12,6 +12,8 @@ comments: true
 
 编写DTD（文档类型定义，Document Type Definition）是一种方式来定义XML文档的结构、元素、属性以及元素间的关系。DTD定义可以内嵌在XML文档中，也可以作为一个外部文件供多个XML文档引用。下面是编写DTD的基本步骤和语法示例：
 
+<!-- more -->
+
 ### 基本结构
 
 DTD可以分为两种形式：内部DTD和外部DTD。
