@@ -5,8 +5,7 @@ authors:
 tags:
  - dtd
  - xml
-comments: false
-draft: true
+comments: true
 ---
 
 # 怎么编写DTD文件

@@ -7,7 +7,6 @@ tags:
  - java
  - springboot
 comments: false
-draft: true
 ---
 
 # Redis开启工作空间
